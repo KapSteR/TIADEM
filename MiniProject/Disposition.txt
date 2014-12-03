@@ -1,0 +1,44 @@
+TIADEM Mini project - Random access compressive sensing
+Disposition
+
+Report stuff
+ - Summary?
+ - Introduction?
+	- Purpose
+	- Novelty?
+
+ - Basic theory
+ 	- Sparsity/Sparsity in natural signals
+ 	- Basis
+ 	- Sampling matrix
+ - Presentation of implementation
+ - Test setup
+ - Results
+ - Conclusion
+
+
+
+MATLAB Stuff:
+ - Get data set
+ - Implement regular sensing
+ - Implement R/D
+ - Implement R/R
+ - Test for best parameters
+ - Simulate packet reception
+ - Calculate error
+
+
+
+Questions for Qi:
+ - Dataset?
+ 	- Where do i find theirs
+ 	- Should i use another
+ 	- How much
+
+ - What/how big is the scope of the project?
+ 	- Size of report
+ 	- Scope of implementation
+ 	- Amount of code to be handed in
+
+ - 
+
