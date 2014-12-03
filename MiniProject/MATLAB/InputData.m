@@ -55,6 +55,12 @@ contourf(...
     100, ...                                            Number of levels
     'LineStyle','none' ...                              Hide lines
 );
+
+save('DATA\SST_data_subset.mat', 'sstDataC')
+
+
+%% Visualize
+
 % colormap('parula')
 colormap('jet')
 colorbar
