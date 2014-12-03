@@ -15,31 +15,53 @@ southMax = ncreadatt(dataPath,'/','southernmost_latitude');
 westMax = ncreadatt(dataPath,'/','westernmost_longitude');
 eastMax = ncreadatt(dataPath,'/','easternmost_longitude');
 
+dateString = ncreadatt(dataPath,'/','start_date');
+dateOfCollection = dateString(1:10);
+
 
 % Index steps per degree
 latStep = latDim/(northMax-southMax);
 lonStep = lonDim/(eastMax-westMax);
 
-northBound = 60;
-southBound = 40;
+% Positive north
+upperBound = 57;
+lowerBound = 54;
 
-westBound = 0;
-eastBound = 20;
+% Positive east
+leftBound = 4;
+rightBound = 7;
 
 % Find index plus zero offset
-northIndex = northBound*latStep + (16000/2);
-southIndex = -southBound*latStep +(16000/2);
-eastIndex  = eastBound*lonStep + (36000/2);
-westIndex  = -westBound*lonStep + (36000/2);
+northIndex = upperBound*latStep + (16000/2);
+southIndex = lowerBound*latStep +(16000/2);
+eastIndex  = rightBound*lonStep + (36000/2);
+westIndex  = leftBound*lonStep + (36000/2);
 
-sstData = ncread(dataPath,'analysed_sst', ...           Set to pull data from
-    [westIndex, southIndex,1], ...                      Start of data grid
-    [northIndex-southIndex, eastIndex-westIndex,1] ...  Indexes to end 
+sstData_raw = ncread(dataPath,'analysed_sst', ...       Set to pull data from.
+    [westIndex, southIndex,1], ...                      Start of data grid.
+    [northIndex-southIndex, eastIndex-westIndex,1] ...  Indexes to end.
     );
 
+% Convert from Kelvin to centigrade
+tempOffset = ncreadatt(dataPath,'analysed_sst','add_offset');
+sstDataC = sstData_raw - tempOffset;
 
 
-
-
-
+figure(1)
+contourf(...
+    [leftBound:1/lonStep:rightBound-1/lonStep], ...     X-axis indexes
+    [lowerBound:1/latStep:upperBound-1/latStep], ...    Y-axis indexes
+    sstDataC, ...                                       Z-values
+    100, ...                                            Number of levels
+    'LineStyle','none' ...                              Hide lines
+);
+% colormap('parula')
+colormap('jet')
+colorbar
+xlabel('Degrees East')
+ylabel('Degrees North')
+grid on
+grid minor
+title(['Sea Surface Temperature ' dateOfCollection])
+    
 
