@@ -32,6 +32,11 @@ southIndex = -southBound*latStep +(16000/2);
 eastIndex  = eastBound*lonStep + (36000/2);
 westIndex  = -westBound*lonStep + (36000/2);
 
+sstData = ncread(dataPath,'analysed_sst', ...           Set to pull data from
+    [westIndex, southIndex,1], ...                      Start of data grid
+    [northIndex-southIndex, eastIndex-westIndex,1] ...  Indexes to end 
+    );
+
 
 
 
