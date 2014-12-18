@@ -46,10 +46,10 @@ y=A*SST;
 d_h=SolveBP(A*Psi_dct', y, n);
 
 SST_h=Psi_dct'*d_h;
-
+%%
 figure(1)
 subplot(2,2,[3 4])
-plot(SST,'b.'); hold on;
+plot(time,SST,'b.'); hold on;
 % plotyy(time,SST_h,time,((SST_h-SST)/SST).^2);
 plot(time,SST_h,'r-');
 legend('original', 'recovered');

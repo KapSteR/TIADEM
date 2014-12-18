@@ -10,7 +10,10 @@ Report stuff
  - Basic theory
  	- Sparsity/Sparsity in natural signals
  	- Basis
+ 		- FFT
+ 		- DCT
  	- Sampling matrix
+		- Random sensing
  - Presentation of implementation
  - Test setup
  - Results
@@ -21,7 +24,6 @@ Report stuff
 MATLAB Stuff:
  - Get data set
  - Implement regular sensing
- - Implement R/D
  - Implement R/R
  - Test for best parameters
  - Simulate packet reception

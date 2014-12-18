@@ -24,12 +24,12 @@ latStep = latDim/(northMax-southMax);
 lonStep = lonDim/(eastMax-westMax);
 
 % Positive north
-upperBound = 57;
-lowerBound = 54;
+upperBound = 56.5;
+lowerBound = 56;
 
 % Positive east
-leftBound = 4;
-rightBound = 7;
+leftBound = 11;
+rightBound = 12;
 
 % Find index plus zero offset
 northIndex = upperBound*latStep + (16000/2);
@@ -47,7 +47,8 @@ tempOffset = ncreadatt(dataPath,'analysed_sst','add_offset');
 sstDataC = sstData_raw - tempOffset;
 
 
-figure(1)
+figure(2)
+clf
 contourf(...
     [leftBound:1/lonStep:rightBound-1/lonStep], ...     X-axis indexes
     [lowerBound:1/latStep:upperBound-1/latStep], ...    Y-axis indexes
