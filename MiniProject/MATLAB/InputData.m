@@ -57,7 +57,7 @@ contourf(...
     'LineStyle','none' ...                              Hide lines
 );
 
-save('DATA\SST_data_subset.mat', 'sstDataC')
+save('DATA\SST_data_subset.mat', 'sstDataC', 'latDim', 'lonDim')
 
 
 %% Visualize

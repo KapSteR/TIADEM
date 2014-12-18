@@ -14,12 +14,11 @@ Report stuff
  		- DCT
  	- Sampling matrix
 		- Random sensing
+		- Determining optimal sensing probability
  - Presentation of implementation
  - Test setup
  - Results
  - Conclusion
-
-
 
 MATLAB Stuff:
  - Get data set
