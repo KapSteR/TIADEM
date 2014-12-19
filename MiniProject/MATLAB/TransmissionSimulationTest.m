@@ -33,6 +33,17 @@ select = find(select >= p);
 % 			- search for other nodes inside +- one transmission time
 % 			- If collision is detected remove index from list of received data points
 
+k = numel(select);
+
+sendTime = rand(k,1) * T;
+
+for i = 1:k
+
+	index = find(sendTime >= (sendTime(i) - Tp) && sendTime <= (sendTime(i) + Tp))
+
+end
+
+
 % 	- Output:
 % 		- List of received data points
 % 		- Percentage of packet reception
