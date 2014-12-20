@@ -57,7 +57,9 @@ tic
     disp('Estimate probability of sensing');
     toc
 
-    Ns = 2500
+    Ns = 2500                             % Fixed
+    % Ns = size(find(abs(v)>1*10^-1),1)     % DCT
+    % k = size(find(abs(v)>10),1)           % FFT
 
     % Find q_s
         qs_test = 0:0.001:1;
