@@ -23,8 +23,8 @@ T = 3600*3; % seconds
 % 		- Generate random number for all data points (nodes)
 % 		- Choose for sensing based on p (Find(x>p))
 
-select = rand(N,1);
-select = find(select >= p);
+selectIndex = rand(N,1);
+selectIndex = find(selectIndex >= p);
 	
 %% 	- Transmission:
 % 		- Generate random number for all selected nodes
@@ -33,15 +33,31 @@ select = find(select >= p);
 % 			- search for other nodes inside +- one transmission time
 % 			- If collision is detected remove index from list of received data points
 
-k = numel(select);
+M = numel(selectIndex);
 
-sendTime = rand(k,1) * T;
+sendTime = rand(M,1) * T-Tp;
 
-for i = 1:k
+receiveIndex = selectIndex;
 
-	index = find(sendTime >= (sendTime(i) - Tp) && sendTime <= (sendTime(i) + Tp))
+for i = 1:M
 
+	% Search for transmission collisions
+	colIndex = find((sendTime(i) - Tp) <= sendTime <= (sendTime(i) + Tp));
+
+	% Exclude oneself
+	colIndex = find(colIndex ~= i);
+
+	% Remove from received set
+	if not(isempty(colIndex))
+
+		receiveIndex = find(receiveIndex ~= selectIndex(i));
+
+	end
 end
+
+k = numel(receiveIndex);
+
+received = k/M
 
 
 % 	- Output:
