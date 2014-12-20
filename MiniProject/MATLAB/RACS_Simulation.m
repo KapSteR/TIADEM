@@ -1,19 +1,24 @@
 %% RACS simulatiom
 clc; clear;
+tic
 
 %% Set required parameters
+    disp('Set required parameters');
+    toc
 
     % Probability of sufficient sensing
-    Ps = 0.90;
+    Ps = 0.90
 
     % Packet time
-    Tp = 0.200; % seconds
+    Tp = 0.200 % seconds
 
     % Frame time 1 hour
-    T = 3600; % seconds
+    T = 3600 % seconds
 
 %% Input data
-    dataPath = 'DATA\SST_data_subset.mat'
+    disp('Input data');
+    toc
+    dataPath = 'DATA\SST_data_subset.mat';
     load(dataPath);
 
     [I,J] = size(sstDataC);
@@ -26,6 +31,8 @@ clc; clear;
     u = reshape(sstDataC',[N,1]);	% Rows
 
 % DCT of uncompressed data
+    disp('DCT of uncompressed data');
+    toc
     v = Xi * u;
 
     figure(1)
@@ -39,8 +46,10 @@ clc; clear;
     semilogy(abs(Xi*u))
 
 %% Estimate probability of sensing
+    disp('Estimate probability of sensing');
+    toc
 
-    Ns = 2500;
+    Ns = 2500
 
     k = Ns;
 
@@ -54,7 +63,7 @@ clc; clear;
         qs = qs_test(index)
 
     % Show how q_s is found
-        figure(1)
+        figure(2)
         plot(qs_test,QK)
 
         xlim([round(qs-0.1,1), round(qs+0.1,1)])
@@ -69,13 +78,13 @@ clc; clear;
 
     % Find p_s
         ps_test = 0:0.001:1;
-        Bmin = 2*N*Tp/(Tcoh-Tp);
+        Beta = 2*N*Tp/(T-Tp);
 
         qs_plot = zeros(size(ps_test));
 
         for i = 1:numel(ps_test);
 
-            qs_plot(i) = ps_test(i) * exp(-Bmin * ps_test(i));
+            qs_plot(i) = ps_test(i) * exp(-Beta * ps_test(i));
 
         end
 
@@ -86,7 +95,7 @@ clc; clear;
 
 
     % Show how p_s is found
-        figure(2)
+        figure(3)
         plot(ps_test,qs_plot)
 
         xlabel('p_s')
@@ -98,9 +107,11 @@ clc; clear;
         title('Required sensing probability (p_s)')
 
 %% Determine received data
+    disp('Determine received data');
+    toc
 
     % Simulate transmission
-    [receiveIndex, M] = TransmissionSimulation( N, p_s, Tp, T );
+    [receiveIndex, M] = TransmissionSimulation( N, ps, Tp, T );
 
     % Build R matrix
     R = zeros(M,N);
@@ -122,7 +133,9 @@ clc; clear;
     sstDataR = reshape(u_h,[J,I])';		% Rows
 
 %% Visualize
-    figure(3)
+    disp('Visualize');
+    toc
+    figure(4)
     subplot(221)
     hold on
     plot(real(u_h))
@@ -173,6 +186,10 @@ clc; clear;
     grid on
     grid minor
     title(['Recovered Sea Surface Temperature ' dateOfCollection])
+
+
+disp('Done');
+toc
 
 
 

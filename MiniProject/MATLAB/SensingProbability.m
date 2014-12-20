@@ -61,13 +61,13 @@ title('Required probability of collision-free packet (q_s)')
 
 % Find p_s
 ps_test = 0:0.001:1;
-Bmin = 2*N*Tp/(Tcoh-Tp);
+Beta = 2*N*Tp/(T-Tp);
 
 qs_plot = zeros(size(ps_test));
 
 for i = 1:numel(ps_test);
 
-	qs_plot(i) = ps_test(i) * exp(-Bmin * ps_test(i));
+    qs_plot(i) = ps_test(i) * exp(-Beta * ps_test(i));
 
 end
 
