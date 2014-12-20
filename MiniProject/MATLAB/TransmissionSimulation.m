@@ -17,15 +17,20 @@ function [ receiveIndex, M ] = TransmissionSimulation( N, p, Tp, T )
 	% Multiply with frame time
 	sendTime = rand(M,1) * T-Tp;
 
-	receiveIndex = selectIndex;
 
+	receiveIndex = selectIndex;
 
 	% For each selected node:
 	for i = 1:M
 
-		% Search for other nodes inside +- one transmission time (Collisions)
-		colIndex = find((sendTime(i) - Tp) <= sendTime <= (sendTime(i) + Tp));
 
+		beforeIndex = find(sendTime < sendTime(i)-Tp);
+		afterIndex  = find(sendTime > sendTime(i)+Tp);
+
+		% Remove all messages before
+		colIndex = find([1:M] ~= beforeIndex);
+		% Remove all messages after
+		colIndex = find(colIndex ~= afterIndex);
 		% Exclude oneself
 		colIndex = find(colIndex ~= i);
 
