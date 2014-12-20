@@ -38,10 +38,9 @@ clc; clear;
     subplot(222)
     semilogy(abs(Xi*u))
 
-
 %% Estimate probability of sensing
 
-    Ns = 2500
+    Ns = 2500;
 
     k = Ns;
 
@@ -54,7 +53,7 @@ clc; clear;
 
         qs = qs_test(index)
 
-
+    % Show how q_s is found
         figure(1)
         plot(qs_test,QK)
 
@@ -80,14 +79,13 @@ clc; clear;
 
         end
 
-
         index = find(qs_plot>=qs,1);
 
         ps = ps_test(index)
 
 
 
-
+    % Show how p_s is found
         figure(2)
         plot(ps_test,qs_plot)
 
@@ -99,77 +97,82 @@ clc; clear;
 
         title('Required sensing probability (p_s)')
 
-%% Determine selection matrix
+%% Determine received data
 
-TransmissionSimulation( N, p, Tp, T )
+    % Simulate transmission
+    [receiveIndex, M] = TransmissionSimulation( N, p_s, Tp, T );
 
+    % Build R matrix
+    R = zeros(M,N);
 
-select = randperm(N,M);
+    for i = 1:M
+        R(i,receiveIndex(i)) = 1;
+    end
 
-R = eye(N);
-R = R(select,:);
+    % Construct received data
+    y = R*u;
 
-y = R*u;
+%% Recunstruct original signel
 
-v_h=SolveBP(R*Xi', y, N);
+    v_h=SolveBP(R*Xi', y, N);
 
-u_h=Xi'*v_h;
+    u_h=Xi'*v_h;
 
-% sstDataR = reshape(u_h,[I,J])		% Columns
-sstDataR = reshape(u_h,[J,I])';		% Rows
-
-%% Visualize
-figure(1)
-subplot(221)
-hold on
-plot(real(u_h))
-legend('original', 'recovered');
-
-subplot(222)
-hold on
-semilogy(abs(v_h))
-legend('original', 'recovered');
-
-
-subplot(223)
-contourf(...
-    [leftBound:1/lonStep:rightBound-1/lonStep], ...     X-axis indexes
-    [lowerBound:1/latStep:upperBound-1/latStep], ...    Y-axis indexes
-    sstDataC, ...                                       Z-values
-    100, ...                                            Number of levels
-    'LineStyle','none' ...                              Hide lines
-);
-
-
-
-% colormap('parula')
-colormap('jet')
-colorbar
-xlabel('Degrees East')
-ylabel('Degrees North')
-grid on
-grid minor
-title(['Original Sea Surface Temperature ' dateOfCollection])
-
-subplot(224)
-contourf(...
-    [leftBound:1/lonStep:rightBound-1/lonStep], ...     X-axis indexes
-    [lowerBound:1/latStep:upperBound-1/latStep], ...    Y-axis indexes
-    sstDataR, ...                                       Z-values
-    100, ...                                            Number of levels
-    'LineStyle','none' ...                              Hide lines
-);
+    % sstDataR = reshape(u_h,[I,J])		% Columns
+    sstDataR = reshape(u_h,[J,I])';		% Rows
 
 %% Visualize
+    figure(3)
+    subplot(221)
+    hold on
+    plot(real(u_h))
+    legend('original', 'recovered');
 
-% colormap('parula')
-colormap('jet')
-colorbar
-xlabel('Degrees East')
-ylabel('Degrees North')
-grid on
-grid minor
-title(['Recovered Sea Surface Temperature ' dateOfCollection])
+    subplot(222)
+    hold on
+    semilogy(abs(v_h))
+    legend('original', 'recovered');
+
+
+    subplot(223)
+    contourf(...
+        [leftBound:1/lonStep:rightBound-1/lonStep], ...     X-axis indexes
+        [lowerBound:1/latStep:upperBound-1/latStep], ...    Y-axis indexes
+        sstDataC, ...                                       Z-values
+        100, ...                                            Number of levels
+        'LineStyle','none' ...                              Hide lines
+    );
+
+
+
+    % colormap('parula')
+    colormap('jet')
+    colorbar
+    xlabel('Degrees East')
+    ylabel('Degrees North')
+    grid on
+    grid minor
+    title(['Original Sea Surface Temperature ' dateOfCollection])
+
+    subplot(224)
+    contourf(...
+        [leftBound:1/lonStep:rightBound-1/lonStep], ...     X-axis indexes
+        [lowerBound:1/latStep:upperBound-1/latStep], ...    Y-axis indexes
+        sstDataR, ...                                       Z-values
+        100, ...                                            Number of levels
+        'LineStyle','none' ...                              Hide lines
+    );
+
+    %% Visualize
+
+    % colormap('parula')
+    colormap('jet')
+    colorbar
+    xlabel('Degrees East')
+    ylabel('Degrees North')
+    grid on
+    grid minor
+    title(['Recovered Sea Surface Temperature ' dateOfCollection])
 
 
 
