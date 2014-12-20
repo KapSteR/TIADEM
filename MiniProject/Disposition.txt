@@ -12,21 +12,25 @@ Report stuff
  	- Basis
  		- FFT
  		- DCT
+ 		
  	- Sampling matrix
 		- Random sensing
 		- Determining optimal sensing probability
+
+	- Conceptual idea of RACS
+
  - Presentation of implementation
  - Test setup
  - Results
  - Conclusion
+ 	- Something about discontinuities when vectorizing space causing harmonics (less sparsity)
 
-MATLAB Stuff:
- - Get data set
- - Implement regular sensing
- - Implement R/R
- - Test for best parameters
- - Simulate packet reception
- - Calculate error
+
+
+
+
+
+
 
 
 

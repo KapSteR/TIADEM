@@ -24,12 +24,12 @@ latStep = latDim/(northMax-southMax);
 lonStep = lonDim/(eastMax-westMax);
 
 % Positive north
-upperBound = 56.5;
-lowerBound = 56;
+upperBound = 55.75;
+lowerBound = 55.25;
 
 % Positive east
-leftBound = 11;
-rightBound = 12;
+leftBound = 5.7;
+rightBound = 6.7;
 
 % Find index plus zero offset
 northIndex = upperBound*latStep + (16000/2);
@@ -43,8 +43,10 @@ sstData_raw = ncread(dataPath,'analysed_sst', ...       Set to pull data from.
     );
 
 % Convert from Kelvin to centigrade
-tempOffset = ncreadatt(dataPath,'analysed_sst','add_offset');
+tempOffset = double(ncreadatt(dataPath,'analysed_sst','add_offset'));
 sstDataC = sstData_raw - tempOffset;
+
+save('DATA\SST_data_subset.mat');
 
 
 figure(2)
@@ -56,9 +58,6 @@ contourf(...
     100, ...                                            Number of levels
     'LineStyle','none' ...                              Hide lines
 );
-
-save('DATA\SST_data_subset.mat', 'sstDataC', 'latDim', 'lonDim')
-
 
 %% Visualize
 
