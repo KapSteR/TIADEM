@@ -3,9 +3,9 @@ clear; clc,
 
 load('DATA\SST_data_subset')
 
- [I,J] = size(sstDataC);
+[I,J] = size(sstDataC);
 
- N = I*J;
+N = I*J;
 
 %% Set required parameters
 

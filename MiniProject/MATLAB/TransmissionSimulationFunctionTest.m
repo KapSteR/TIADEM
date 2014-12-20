@@ -3,9 +3,9 @@ clear; clc,
 
 load('DATA\SST_data_subset')
 
- [I,J] = size(sstDataC);
+[I,J] = size(sstDataC);
 
- N = I*J;
+N = I*J;
 
 %% Set required parameters
 
@@ -19,7 +19,7 @@ Tp = 0.200;	% seconds
 T = 3600*3; % seconds
 
 
-receiveIndex = transmissionSimulation(N, p, Tp, T);
+[receiveIndex, M] = TransmissionSimulation(N, p, Tp, T);
 
 k = numel(receiveIndex)
 
