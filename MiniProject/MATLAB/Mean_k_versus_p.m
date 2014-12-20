@@ -9,7 +9,7 @@ N = 5000;
 Tp = 0.200;	% seconds
 
 % Frame time 3 hours
-T = 1000; % seconds
+T = 3600; % seconds
 
 
 

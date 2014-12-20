@@ -16,7 +16,7 @@ u = reshape(sstDataC',[N,1]);	% Rows
 v = Xi * u;
 
 % k = size(find(abs(v)>10),1)		% fft
-k = size(find(abs(v)>2*10^-1),1)	% dct
+k = size(find(abs(v)>1*10^-1),1)	% dct
 % k = 300; 							% test
 
 figure(1)
@@ -30,6 +30,7 @@ subplot(222)
 semilogy(abs(Xi*u))
 
 M = 6*k
+M = 2500
 %%
 select = randperm(N,M);
 
@@ -45,7 +46,7 @@ u_h=Xi'*v_h;
 % sstDataR = reshape(u_h,[I,J])		% Columns
 sstDataR = reshape(u_h,[J,I])';		% Rows
 
-%%
+%% Visualize
 figure(1)
 subplot(221)
 hold on
@@ -67,7 +68,7 @@ contourf(...
     'LineStyle','none' ...                              Hide lines
 );
 
-%% Visualize
+
 
 % colormap('parula')
 colormap('jet')
@@ -76,7 +77,7 @@ xlabel('Degrees East')
 ylabel('Degrees North')
 grid on
 grid minor
-title(['Sea Surface Temperature ' dateOfCollection])
+title(['Original Sea Surface Temperature ' dateOfCollection])
 
 subplot(224)
 contourf(...

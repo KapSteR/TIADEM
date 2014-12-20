@@ -16,7 +16,7 @@ Ps = 0.90;
 Tp = 0.200;	% seconds
 
 % Frame time 3 hours
-T = 3600*3; % seconds
+T = 3600; % seconds
 
 % Coherence time (assumed to be large ie. 1 hour)
 Tcoh = T; 	% seconds 
@@ -31,8 +31,8 @@ S = 500;
 
 %% Calculate sensing probability
 
-Ns = C*S*log10(N);
-% Ns = 3200;
+% Ns = C*S*log10(N);
+Ns = 2500;
 
 k = Ns;
 
@@ -56,6 +56,8 @@ ylabel('Q_K(Ns)')
 
 line([0 qs],[Ps Ps],'color','k')
 line([qs qs], [0 Ps], 'color', 'k')
+
+title('Required probability of collision-free packet (q_s)')
 
 % Find p_s
 ps_test = 0:0.001:1;
@@ -85,5 +87,7 @@ ylabel('q_s')
 
 line([0 ps],[qs qs],'color','k')
 line([ps ps], [0 qs], 'color', 'k')
+
+title('Required sensing probability (p_s)')
 
 
