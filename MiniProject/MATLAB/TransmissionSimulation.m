@@ -3,19 +3,25 @@ function [ receiveIndex, M ] = TransmissionSimulation( N, p, Tp, T )
 % Based on Number of nodes, probability of sensing, frame time and transmission time 
 % it returns a list of received data indexes
 
+	%% DEBUG
+
+	% if p>= 0.7;
+	% 	disp('Test');
+	% end
+
 
 	%% Initialization
 	% Generate random number for all data points (nodes)
 	selectIndex = rand(N,1);
 	
 	% Choose for sensing based on p
-	selectIndex = find(selectIndex >= p);
+	selectIndex = find(selectIndex <= p);
 	M = numel(selectIndex);
 
 	%% 	- Transmission:	
 	% Generate random number for all selected nodes
 	% Multiply with frame time
-	sendTime = rand(M,1) * T-Tp;
+	sendTime = rand(M,1) * (T-Tp);
 
 
 	receiveIndex = selectIndex;
@@ -28,16 +34,17 @@ function [ receiveIndex, M ] = TransmissionSimulation( N, p, Tp, T )
 		afterIndex  = find(sendTime > sendTime(i)+Tp);
 
 		% Remove all messages before
-		colIndex = find([1:M] ~= beforeIndex);
+		colIndex = setdiff([1:M],beforeIndex);
 		% Remove all messages after
-		colIndex = find(colIndex ~= afterIndex);
+		colIndex = setdiff(colIndex,afterIndex);
 		% Exclude oneself
-		colIndex = find(colIndex ~= i);
+		colIndex = setdiff(colIndex, i);
 
 		% If collision is detected remove index from list of received data points
 		if not(isempty(colIndex))
 
-			receiveIndex = find(receiveIndex ~= selectIndex(i));
+            % receiveIndex = find(receiveIndex ~= selectIndex(i));
+            receiveIndex = setdiff(receiveIndex, selectIndex(i));
 
 		end
 	end
