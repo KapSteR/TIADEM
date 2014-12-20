@@ -4,7 +4,7 @@ tic
 
 %% Set required parameters
     disp('Set required parameters');
-    toc
+    
 
     % Probability of sufficient sensing
     Ps = 0.90
@@ -17,7 +17,7 @@ tic
 
 %% Input data
     disp('Input data');
-    toc
+    
     dataPath = 'DATA\SST_data_subset.mat';
     load(dataPath);
 
@@ -32,18 +32,26 @@ tic
 
 % DCT of uncompressed data
     disp('DCT of uncompressed data');
-    toc
+    
     v = Xi * u;
 
     figure(1)
     clf(1)
     subplot(221)
     plot(u)
+    xlabel('Data point index')
+    ylabel('Temperature [C]')
+    title('Raw data')
+
     % X = fft(u);
     % X = v; % fft with matrix multiplication
     X = dct(u);
     subplot(222)
     semilogy(abs(Xi*u))
+    xlabel('Coefficient index')
+    ylabel('Magnitude [C]')
+    title('DCT Transform')
+
 
 %% Estimate probability of sensing
     disp('Estimate probability of sensing');
@@ -51,12 +59,9 @@ tic
 
     Ns = 2500
 
-    k = Ns;
-
-
     % Find q_s
         qs_test = 0:0.001:1;
-        PK = binocdf(k,N,qs_test);
+        PK = binocdf(Ns,N,qs_test);
         QK = 1-PK;
         index = find(QK>= Ps,1);
 
@@ -135,7 +140,7 @@ tic
 %% Visualize
     disp('Visualize');
     toc
-    figure(4)
+    figure(1)
     subplot(221)
     hold on
     plot(real(u_h))
@@ -175,8 +180,6 @@ tic
         100, ...                                            Number of levels
         'LineStyle','none' ...                              Hide lines
     );
-
-    %% Visualize
 
     % colormap('parula')
     colormap('jet')
