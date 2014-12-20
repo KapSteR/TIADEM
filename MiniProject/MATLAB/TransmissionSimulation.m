@@ -1,4 +1,4 @@
-function [ receiveIndex, M ] = TransmissionSimulation( N, p, Tp, T )
+function [ receiveIndex, M, k ] = TransmissionSimulation( N, p, Tp, T )
 %TransmissionSimulation Simulates transmission in RACS. 
 % Based on Number of nodes, probability of sensing, frame time and transmission time 
 % it returns a list of received data indexes
@@ -49,8 +49,11 @@ function [ receiveIndex, M ] = TransmissionSimulation( N, p, Tp, T )
 		end
 	end
 
+	k = numel(receiveIndex);
+
 	%% Return:
 	% 	- receiveIndex
 	% 	- M
+	%	- k
 end
 

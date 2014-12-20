@@ -111,12 +111,12 @@ tic
     toc
 
     % Simulate transmission
-    [receiveIndex, M] = TransmissionSimulation( N, ps, Tp, T );
+    [receiveIndex, M, k] = TransmissionSimulation( N, ps, Tp, T );
 
     % Build R matrix
     R = zeros(M,N);
 
-    for i = 1:M
+    for i = 1:k
         R(i,receiveIndex(i)) = 1;
     end
 
