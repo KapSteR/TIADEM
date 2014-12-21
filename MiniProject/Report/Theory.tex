@@ -83,12 +83,61 @@
 	\subsection{Random Access Compressive sensing} % (fold)
 	\label{sub:random_access_compressive_sensing}
 
-		In this section a brief introduction to the ideas 
-	
+		In this section a brief introduction to the ideas behind RACS.
+		\footnote{For more information see the original article \cite{Fazel2011}}.
+		This will be done in two parts, one about the random access transmission protocol and one about the proposed method of CS ind the spatial domain.
+
+		Lastly some methods for enhancing the performance of the CS method are proposed.
+		
+		\subsection{Compressive Sensing in Spatial Domain} % (fold)
+		\label{sub:compressive_sensing_in_spatial_domain}
+
+			The foundation of the proposed method for CS in the spatial domain is a regular grid of $I \times J = N$ wireless sensors spanning an area $A = Nd^2$, where $d$ is the distance between sensors in orthogonal directions.
+
+			Each sensor knows its own position in the grid and can sample a physical phenomenon.
+			The data at a certain sensor within time frame $n$ is represented as
+
+			\begin{equation}
+				u_ij(n) = u(x_i, y_j, n)
+			\end{equation}
+
+			where $(x_i, y_j)$ is the sensors location in the grid.
+
+			The frame duration is dependent on the coherence time $T_coh$ of the signal i.e. for how long can one assume that the data has not changed significantly.
+			The map of the data of all the sensors can then be represented as
+
+			\begin{equation}
+				U(n) =
+			 	\begin{bmatrix}
+			  		u_{11}	&	\cdots 	& 	u_{1J}	\\
+			  		\vdots	&	\vdots	&	\vdots	\\
+					\cdots 	& 	u_{IJ}	& 	\cdots 	\\
+					\vdots	&	\vdots	&	\vdots	\\
+					u_{I1} 	& 	\cdots 	& 	u_{IJ}
+				\end{bmatrix}
+			\end{equation}
+
+
+			
+
+		
+			% subsection compressive_sensing_in_spatial_domain (end)
+
+
+		\subsection{Random Access} % (fold)
+		\label{sub:random_access}
+		
+
+			% subsection random_access (end)
+
+
+		\subsection{Suggestions for improving the RACS method} % (fold)
+		\label{sub:suggestions_for_improving_the_racs_method}
+		
+
+			% subsection suggestions_for_improving_the_racs_method (end)
+
 		% subsection random_access_compressive_sensing (end)
-
-
-
 
 	% section theory (end)
 
