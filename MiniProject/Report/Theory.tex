@@ -93,19 +93,19 @@
 		\label{sub:compressive_sensing_in_spatial_domain}
 
 			The foundation of the proposed method for CS in the spatial domain is a regular grid of $I \times J = N$ wireless sensors spanning an area $A = Nd^2$, where $d$ is the distance between sensors in orthogonal directions.
-
 			Each sensor knows its own position in the grid and can sample a physical phenomenon.
-			The data at a certain sensor within time frame $n$ is represented as
+			The sensors are able to transmit their data to a computationally powerful sink called a \emph{Fusion Center} (FC).
 
+			The data at a certain sensor within time frame $n$ is represented as
 			\begin{equation}
 				u_ij(n) = u(x_i, y_j, n)
 			\end{equation}
-
+			%
 			where $(x_i, y_j)$ is the sensors location in the grid.
 
 			The frame duration is dependent on the coherence time $T_coh$ of the signal i.e. for how long can one assume that the data has not changed significantly.
 			The map of the data of all the sensors can then be represented as
-
+			%
 			\begin{equation}
 				\mathbf{U}(n) =
 			 	\begin{bmatrix}
@@ -116,38 +116,38 @@
 					u_{I1} 	& 	\cdots 	& 	u_{IJ}
 				\end{bmatrix}
 			\end{equation}
-
+			%
 			$\mathbf{U}(n)$ is an $I \times J$ dense matrix, with entries that vary slowly in space.
 			Because of the slow spatial variation of the data, the corresponding Fourier coefficients, $\mathbf{V}(n)$, are presumed sparse.
 			Further, \cite{Fazel2011} states that $\mathbf{v}(n) = \Psi_{DFT}\ \mathbf{u}(n)$, where $\mathbf{v}(n) = \text{vec}(\mathbf{V}(n))$ is the $N \times 1$ vector gathered by stacking the columns of $\mathbf{V}(n)$.
 
 			Data from $M$ sensors is then randomly selected for use in reconstruction.
 			The selected data $y(n)$ is represented as
-
+			%
 			\begin{equation}
 				\mathbf{y}(n) = 
 					\mathbf{R}(n) \mathbf{u}(n) + \mathbf{z}(n)
 					= \mathbf{R}(n) \Psi_{IDFT}\ \mathbf{v}(n) + \mathbf{z}(n)
 			\end{equation}
-
+			%
 			where $\mathbf{R}(n)$ is an $M \times N$ random selection matrix consisting of $M$ rows of $I^N$ selected uniformly at random.
 
 			The reconstruction problem is then:
-
+			%
 			\begin{equation}
 				\min_{\mathbf{\hat{v}(n)}} 
 					\|\mathbf{\hat{v}(n)}\|_{l_1} 
 					\ \ \text{subject to} \ \ 
 					\mathbf{R}(n) \Psi_{IDFT}\ \mathbf{\hat{v}}(n) = \mathbf{y}(n)
 			\end{equation}
-
+			%
 			The minimum number of samples needed for sufficient sensing $N_s$ is stated in theory to be
-
+			%
 			\begin{equation}
 				N_s = CS \log{N}
 				\label{eq:NsTheory} 
 			\end{equation}
-
+			%
 			where $S$ is the sparsity of the signal and $C$ is a constant, independent of $N$ and $S$.
 			The authors of RACS refer to \cite{Candes2006} for a upper bound on C.
 			Another method is to determine $N_s$ experimentally.
@@ -166,10 +166,35 @@
 					At the beginning of each frame a sensor node $i$ randomly chooses to participate in sensing with probability $p$, or stay inactive.
 				\item 
 					If node $i$ is selected for sensing, it samples the quantity of interest and transmits it along with its location.
-				\item 
+				\item
+					Node $i$ selects a transmission-delay $\theta_{i}$ before attempting to send its packet.
+				\item
+					The FC collects singleton packets, and discards any colliding packets.
+				\item
+					At the end of the frame the FC reconstructs  the data from the received measurements.
 
 			\end{enumerate}
 
+			To figure out which probability of sensing $p$ will result in enough collision-free packets arriving necessary for reconstruction, one first has to make a model of the transmission.
+
+			The provability of a packet arriving without collision is
+			\begin{equation}
+				q = pe^{-2\frac{NpT_p}{T-T_p}}
+			\end{equation}
+			%
+			where $T$ is the frame length and $T_p$ is the transmission time for one packet.
+
+			The number of collision-free packets received in a frame, $K$ i a random variable with a binomial distribution:
+			\begin{equation}
+				P_K(k) = \text{Prob}\{K=k\} = B(N,q) =
+					\binom{N}{k} q^k(1-q)^{N-k}
+			\end{equation}
+			%
+			In order to guarantee with a \emph{probability of sufficient sensing} of $P_s$ that $K >= N_s$ one needs to look at the complementary cumulative distribution function of $K$, $Q_K(N_S)$.
+			The condition can be expressed as:
+			\begin{equation}
+				\text{Prob}\{K \geq N_s\} = Q_K(N_S) = (1-P_K(N_s)) \geq P_s
+			\end{equation}
 
 		
 
