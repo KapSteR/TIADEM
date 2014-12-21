@@ -22,12 +22,12 @@
 		\label{sub:condensed_representation}
 
 			When a signal is sparse in the domain it is samples in, e.g. a high sample-rate time-series sampling infrequently occurring events, one can make a \emph{condensed representation} of this signal by simple dimensionality reduction.
-
+			%
 			\begin{equation}
 				\mathbf{y} = \Phi \mathbf{x}
 				\label{eq:dimReduc}
 			\end{equation}
-
+			%
 			In (\ref{eq:dimReduc}) $\mathbf{x}$ is an $N$-dimensional $K$-sparse vector of the original signal, $\Phi$ is an $ M \times N $ dimensionality reduction matrix and $\mathbf{y}$ is an $M$-dimensional dense vector containing a condensed representation of $\mathbf{x} $, where:
 			\begin{equation}
 				K < M << N 	
@@ -41,35 +41,26 @@
 		\label{sub:basis}
 			
 			When a signal is sparse in a domain different from the sampled domain, one can make a transformation, by way of a transformation matrix.
-
+			%
 			\begin{equation}
 				\mathbf{y} = \Phi \Psi \mathbf{x}
 				\label{eq:transMat}	
 			\end{equation}
-
+			%
 			In (\ref{eq:transMat})) $\Psi$ is an $N \times N$ transformation matrix e.g. the Discrete Fourier Transform (DFT) or Discrete cosine Transform (DCT).
 			The dimensionality reduction matrix and the transformation matrix can be combined to an augmented dimensionality matrix.
-
+			%
 			\begin{equation}
 				\mathbf{y} = \Phi \Psi \mathbf{x} = \Phi' \mathbf{x}
 				\label{eq:augDimReduc}	
 			\end{equation}
-
+			%
 			This, combined with the fact that random projection is an option negates the need for a transformation matrix, as a random projection of any matrix is just another random matrix.
 			It is then only necessary to be aware of the domain in which the signal is sparse when one is reconstructing the signal, not when sampling or transmitting.
 			One needs only to be able to know or construct the random projection matrix used to compress the signal.
 			This can be done by using pseudo-random generator with a know or predictable seed.
 
 			% sub-subsection basis (end)
-
-		\subsection{Signal Reconstruction} % (fold)
-		\label{sub:signal_reconstruction}
-
-			When 
-
-			\fxwarning{WRITE THIS SECTION} 
-		
-			% subsection signal_reconstruction (end)
 
 	\subsection{Random Access Compressive Sensing} % (fold)
 	\label{sub:random_access_compressive_sensing}
@@ -133,8 +124,8 @@
 					\mathbf{R}(n) \Psi_{IDFT}\ \mathbf{\hat{v}}(n) = \mathbf{y}(n)
 			\end{equation}
 			%
-			
-			
+			This can be solved as a convex optimization problem, and a number of MATLAB tools are available to do so e.g. Sparselab \cite{SparseLab:Online} and CVX \cite{CVX:Online}
+
 			The minimum number of samples needed for sufficient sensing $N_s$ is stated in theory to be
 			%
 			\begin{equation}
@@ -146,6 +137,7 @@
 			The authors of RACS refer to \cite{Candes2006} for a upper bound on C.
 			Another method is to determine $N_s$ experimentally.
 			This method often produces even lower numbers for $N_s$ than (\ref{eq:NsTheory})).
+			\fxnote{insert figure}
 		
 			% sub-subsection compressive_sensing_in_spatial_domain (end)
 
