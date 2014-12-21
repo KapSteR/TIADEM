@@ -6,22 +6,86 @@
 \section{Theory} % (fold)
 \label{sec:theory}
 
+	In this section a brief overview of the theory of compressive sensing and RACS is given, to provide a basic understanding of the subject and to remove ambiguities in terminology and notation.
+	For a thorough review of CS theory the read is referred to other literature \cite{Fazel2011,Candes2008}.
+
 	\subsection{Sparsity and Basis} % (fold)
 	\label{sub:sparsity_and_basis}
+
+		It is well known that natural signals are often sparse in some domain (time, frequency etc.)\cite{Candes2008}.
+		They are however often sampled at a high resolution in that, or indeed another, domain, to accurately present information in the denser parts of the signal.
+		For this reason, lots of data with little to no extra information is being collected and maybe also transmitted, causing an overhead at the expense of for example the lifetime of a Wireless Sensor Network (WSN).
+
+		The theory of CS states that it is possible to do a sparse sampling of a dense signal, sparse in a different domain, and, with high accuracy, reconstruct the sparse representation, and hence the original signal.
+
+		\subsubsection{Condensed representation} % (fold)
+		\label{sub:condensed_representation}
+
+			When a signal is sparse in the domain it is samples in, e.g. a high sample-rate time-series sampling infrequently occurring events, one can make a \emph{condensed representation} of this signal by simple dimensionality reduction.
+
+			\begin{equation}
+				\mathbf{y} = \Phi \mathbf{x}
+				\label{eq:dimReduc}
+			\end{equation}
+
+			In (\ref{eq:dimReduc}) $\mathbf{x}$ is an $N$-dimensional $K$-sparse vector of the original signal, $\Phi$ is an $ M \times N $ dimensionality reduction matrix and $\mathbf{y}$ is an $M$-dimensional dense vector containing a condensed representation of $\mathbf{x} $, where:
+			\begin{equation}
+				K < M << N 	
+			\end{equation}
+
+			It can then be proven that using \emph{random projection} i.e. using a random dimensionality reduction matrix $\Phi$, will allow for recovery of $\mathbf{x}$ with little to no information loss, with overwhelming probability.
+		
+			% sub-subsection condensed_representation (end)
+
+		\subsubsection{Basis} % (fold)
+		\label{sub:basis}
+			
+			When a signal is sparse in a domain different from the sampled domain, one can make a transformation, by way of a transformation matrix.
+
+			\begin{equation}
+				\mathbf{y} = \Phi \Psi \mathbf{x}
+				\label{eq:transMat}	
+			\end{equation}
+
+			In (\ref{eq:transMat})) $\Psi$ is an $N \times N$ transformation matrix e.g. the Discrete Fourier Transform (DFT) or Discrete cosine Transform (DCT).
+			The dimensionality reduction matrix and the transformation matrix can be combined to an augmented dimensionality matrix.
+
+			\begin{equation}
+				\mathbf{y} = \Phi \Psi \mathbf{x} = \Phi' \mathbf{x}
+				\label{eq:augDimReduc}	
+			\end{equation}
+
+			This, combined with the fact that random projection is an option negates the need for a transformation matrix, as a random projection of any matrix is just another random matrix.
+			It is then only necessary to be aware of the domain in which the signal is sparse when one is reconstructing the signal, not when sampling or transmitting.
+			One needs only to be able to know or construct the random projection matrix used to compress the signal.
+			This can be done by using pseudo-random generator with a know or predictable seed.
+
+			% sub-subsection basis (end)
+
+		\subsection{Signal Reconstruction} % (fold)
+		\label{sub:signal_reconstruction}
+
+			\fxwarning{WRITE THIS SECTION} 
+		
+			% subsection signal_reconstruction (end)
+
+
 	
-	% subsection sparsity_and_basis (end)
+		% subsection sparsity_and_basis (end)
 
 
-	\subsection{Sampling Matrix} % (fold)
-	\label{sub:sampling_matrix}
+	% \subsection{Sampling Matrix} % (fold)
+	% \label{sub:sampling_matrix}
 
-		% subsection sampling_matrix (end)
+	% 	% subsection sampling_matrix (end)
 
 
-	\subsection{Random Access Comressive sensing} % (fold)
-	\label{sub:random_access_comressive_sensing}
+	\subsection{Random Access Compressive sensing} % (fold)
+	\label{sub:random_access_compressive_sensing}
+
+		In this section a brief introduction to the ideas 
 	
-		% subsection random_access_comressive_sensing (end)
+		% subsection random_access_compressive_sensing (end)
 
 
 
