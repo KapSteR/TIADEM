@@ -107,7 +107,7 @@
 			The map of the data of all the sensors can then be represented as
 
 			\begin{equation}
-				U(n) =
+				\mathbf{U}(n) =
 			 	\begin{bmatrix}
 			  		u_{11}	&	\cdots 	& 	u_{1J}	\\
 			  		\vdots	&	\vdots	&	\vdots	\\
@@ -117,9 +117,20 @@
 				\end{bmatrix}
 			\end{equation}
 
+			$\mathbf{U}(n)$ is an $I \times J$ dense matrix, with entries that vary slowly in space.
+			Because of the slow spatial variation of the data, the corresponding Fourier coefficients, $\mathbf{V}(n)$, are presumed sparse.
+			Further, \cite{Fazel2011} states that $\mathbf{v}(n) = \Psi_{DFT}\ \mathbf{u}(n)$, where $\mathbf{v}(n) = \text{vec}(\mathbf{V}(n))$ is the $N \times 1$ vector gathered by stacking the columns of $\mathbf{V}(n)$.
 
-			
+			Data from $M$ sensors is then randomly selected for use in reconstruction.
+			The selected data $y(n)$ is represented as
 
+			\begin{equation}
+				\mathbf{y}(n) = 
+					\mathbf{R}(n) \mathbf{u}(n) + \mathbf{z}(n)
+					= \mathbf{R}(n) \Psi_{IDFT}\ \mathbf{v}(n) + \mathbf{z}(n)
+			\end{equation}
+
+			where $\mathbf{R}(n)$ is an $M \times N$ random selection matrix consisting of $M$ rows of $I^N$ selected uniformly at random.
 		
 			% subsection compressive_sensing_in_spatial_domain (end)
 
