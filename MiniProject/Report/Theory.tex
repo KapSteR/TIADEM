@@ -80,7 +80,7 @@
 	% 	% subsection sampling_matrix (end)
 
 
-	\subsection{Random Access Compressive sensing} % (fold)
+	\subsection{Random Access Compressive Sensing} % (fold)
 	\label{sub:random_access_compressive_sensing}
 
 		In this section a brief introduction to the ideas behind RACS.
@@ -89,7 +89,7 @@
 
 		Lastly some methods for enhancing the performance of the CS method are proposed.
 		
-		\subsection{Compressive Sensing in Spatial Domain} % (fold)
+		\subsubsection{Compressive Sensing in Spatial Domain} % (fold)
 		\label{sub:compressive_sensing_in_spatial_domain}
 
 			The foundation of the proposed method for CS in the spatial domain is a regular grid of $I \times J = N$ wireless sensors spanning an area $A = Nd^2$, where $d$ is the distance between sensors in orthogonal directions.
@@ -103,7 +103,7 @@
 			%
 			where $(x_i, y_j)$ is the sensors location in the grid.
 
-			The frame duration is dependent on the coherence time $T_coh$ of the signal i.e. for how long can one assume that the data has not changed significantly.
+			The frame duration is dependent on the coherence time $T_{coh}$ of the signal i.e. for how long can one assume that the data has not changed significantly.
 			The map of the data of all the sensors can then be represented as
 			%
 			\begin{equation}
@@ -115,11 +115,12 @@
 					\vdots	&	\vdots	&	\vdots	\\
 					u_{I1} 	& 	\cdots 	& 	u_{IJ}
 				\end{bmatrix}
+				\label{eq:dataMap}
 			\end{equation}
 			%
 			$\mathbf{U}(n)$ is an $I \times J$ dense matrix, with entries that vary slowly in space.
 			Because of the slow spatial variation of the data, the corresponding Fourier coefficients, $\mathbf{V}(n)$, are presumed sparse.
-			Further, \cite{Fazel2011} states that $\mathbf{v}(n) = \Psi_{DFT}\ \mathbf{u}(n)$, where $\mathbf{v}(n) = \text{vec}(\mathbf{V}(n))$ is the $N \times 1$ vector gathered by stacking the columns of $\mathbf{V}(n)$.
+			Further, \cite{Fazel2011a} states that $\mathbf{v}(n) = \Psi_{DFT}\ \mathbf{u}(n)$, where $\mathbf{v}(n) = \text{vec}(\mathbf{V}(n))$ is the $N \times 1$ vector gathered by stacking the columns of $\mathbf{V}(n)$.
 
 			Data from $M$ sensors is then randomly selected for use in reconstruction.
 			The selected data $y(n)$ is represented as
@@ -153,10 +154,10 @@
 			Another method is to determine $N_s$ experimentally.
 			This method often produces even lower numbers for $N_s$ than (\ref{eq:NsTheory})).
 		
-			% subsection compressive_sensing_in_spatial_domain (end)
+			% sub-subsection compressive_sensing_in_spatial_domain (end)
 
 
-		\subsection{Random Access} % (fold)
+		\subsubsection{Random Access} % (fold)
 		\label{sub:random_access}
 
 			The proposed RACS scheme is as follows:
@@ -177,9 +178,10 @@
 
 			To figure out which probability of sensing $p$ will result in enough collision-free packets arriving necessary for reconstruction, one first has to make a model of the transmission.
 
-			The provability of a packet arriving without collision is
+			The probability of a packet arriving without collision is
 			\begin{equation}
 				q = pe^{-2\frac{NpT_p}{T-T_p}}
+				\label{eq:q_of_p} 
 			\end{equation}
 			%
 			where $T$ is the frame length and $T_p$ is the transmission time for one packet.
@@ -194,15 +196,46 @@
 			The condition can be expressed as:
 			\begin{equation}
 				\text{Prob}\{K \geq N_s\} = Q_K(N_S) = (1-P_K(N_s)) \geq P_s
+				\label{eq:CCDF} 
 			\end{equation}
+			%
+			Using (\ref{eq:CCDF}), a sufficient probability of a packet arriving without collision, $q_s$ can be found numerically.
+			\fxwarning{Insert figure?}
+			With $q_s$ one can then solve (\ref{eq:q_of_p})) for $p_s$.
+			\fxwarning{Figure again}.
+			It is important to note here, that a solution of $p_s$ for a given $q_s, N, T$ and $T_p$ does not necessarily exit.
+			This is because constraints on bandwidth, described by $T$ and $T_p$, may prevent enough packets from arriving, even even if enough are sending because of collisions.
 
-		
-
-			% subsection random_access (end)
+			% sub-subsection random_access (end)
 
 
-		\subsection{Suggestions for improving the RACS method} % (fold)
+		\subsubsection{Suggestions for improving the RACS method} % (fold)
 		\label{sub:suggestions_for_improving_the_racs_method}
+
+			Two suggestions for improving RACS as proposed by \cite{Fazel2011a} are presented below.
+			One is on the choice of basis, the other on the way spatial data is aggregated into a vector for use with CS.
+
+			\paragraph{Choice of Basis} % (fold)
+			\label{par:choice_of_basis}
+			
+				As described in Section \ref{sub:compressive_sensing_in_spatial_domain}, DFT is used for a sparse representation basis.
+				I suggest using DCT instead.
+
+				DCT has many benefits that has furthered its use in other compression schemes; \emph{JPEG} and \emph{mp3} both employ DCTs for example.
+
+				Firstly, DCTs work only with real numbers and cosines, where DFT uses sine and cosines in a complex representation. This could be an advantage on some platforms, but is not the most important factor in this use case.
+
+				Secondly, DCTs often converge in few coefficients that DFT, advantageous for sparsity applications.
+				This is in part due to the nature of the DCT, that handles discontinuities at the boundaries better.
+
+				% paragraph choice_of_basis (end)
+
+			\paragraph{Vectorization of data map} % (fold)
+			\label{par:vectorization_of_data_map}
+
+			As described in Section \ref{sub:compressive_sensing_in_spatial_domain}
+			
+				% paragraph vectorization_of_data_map (end)
 		
 
 			% subsection suggestions_for_improving_the_racs_method (end)
