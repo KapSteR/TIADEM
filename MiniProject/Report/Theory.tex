@@ -131,6 +131,27 @@
 			\end{equation}
 
 			where $\mathbf{R}(n)$ is an $M \times N$ random selection matrix consisting of $M$ rows of $I^N$ selected uniformly at random.
+
+			The reconstruction problem is then:
+
+			\begin{equation}
+				\min_{\mathbf{\hat{v}(n)}} 
+					\|\mathbf{\hat{v}(n)}\|_{l_1} 
+					\ \ \text{subject to} \ \ 
+					\mathbf{R}(n) \Psi_{IDFT}\ \mathbf{\hat{v}}(n) = \mathbf{y}(n)
+			\end{equation}
+
+			The minimum number of samples needed for sufficient sensing $N_s$ is stated in theory to be
+
+			\begin{equation}
+				N_s = CS \log{N}
+				\label{eq:NsTheory} 
+			\end{equation}
+
+			where $S$ is the sparsity of the signal and $C$ is a constant, independent of $N$ and $S$.
+			The authors of RACS refer to \cite{Candes2006} for a upper bound on C.
+			Another method is to determine $N_s$ experimentally.
+			This method often produces even lower numbers for $N_s$ than (\ref{eq:NsTheory})).
 		
 			% subsection compressive_sensing_in_spatial_domain (end)
 
