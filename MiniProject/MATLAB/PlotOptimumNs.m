@@ -3,7 +3,7 @@ clc; clear;
 
 
 %% Input SST data
-load('DATA\OptimumNsMSEVeryLarge.mat')
+load('DATA\OptimumNsMSESnake.mat')
 figure(3)
 semilogy(M(1:end-1),MSE(1:end-1))
 

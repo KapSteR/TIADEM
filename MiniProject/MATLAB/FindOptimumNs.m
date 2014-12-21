@@ -12,6 +12,17 @@ N = I*J;
 % Xi = kron(dftmtx(I),dftmtx(J)); % fft
 Xi = dctmtx(N);                 % dct
 
+snake = true;
+
+if snake
+% Make snake pattern
+    for i = 2:2:I
+
+        sstDataC(i,:) = fliplr(sstDataC(i,:));
+
+    end
+end
+
 u = reshape(sstDataC,[N,1]);	% Columns
 u = reshape(sstDataC',[N,1]);	% Rows
 % u = sstDataC(:);
@@ -19,10 +30,10 @@ u = reshape(sstDataC',[N,1]);	% Rows
 
 %% Start iterating 
 
-M = [1, 200:200:5000];
+M = logspace(0,4,10)
 n_iters = numel(M);
 MSE = zeros(n_iters,1);
-n_retry = 3;
+n_retry = 10;
 mse = zeros(n_retry,1);
 
 figure(1)
@@ -53,7 +64,7 @@ for i = 1:n_iters
 
 	MSE(i) = mean(mse);
 
-	save('DATA\OptimumNsMSEVeryLarge', 'MSE', 'M')
+	save('DATA\OptimumNsMSESnake', 'MSE', 'M')
 
 	semilogy(M,MSE/max(MSE))
 	drawnow
