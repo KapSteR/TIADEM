@@ -65,20 +65,11 @@
 		\subsection{Signal Reconstruction} % (fold)
 		\label{sub:signal_reconstruction}
 
+			When 
+
 			\fxwarning{WRITE THIS SECTION} 
 		
 			% subsection signal_reconstruction (end)
-
-
-	
-		% subsection sparsity_and_basis (end)
-
-
-	% \subsection{Sampling Matrix} % (fold)
-	% \label{sub:sampling_matrix}
-
-	% 	% subsection sampling_matrix (end)
-
 
 	\subsection{Random Access Compressive Sensing} % (fold)
 	\label{sub:random_access_compressive_sensing}
@@ -120,7 +111,7 @@
 			%
 			$\mathbf{U}(n)$ is an $I \times J$ dense matrix, with entries that vary slowly in space.
 			Because of the slow spatial variation of the data, the corresponding Fourier coefficients, $\mathbf{V}(n)$, are presumed sparse.
-			Further, \cite{Fazel2011a} states that $\mathbf{v}(n) = \Psi_{DFT}\ \mathbf{u}(n)$, where $\mathbf{v}(n) = \text{vec}(\mathbf{V}(n))$ is the $N \times 1$ vector gathered by stacking the columns of $\mathbf{V}(n)$.
+			Further, \cite{Fazel2011} states that $\mathbf{v}(n) = \Psi_{DFT}\ \mathbf{u}(n)$, where $\mathbf{v}(n) = \text{vec}(\mathbf{V}(n))$ is the $N \times 1$ vector gathered by stacking the columns of $\mathbf{V}(n)$.
 
 			Data from $M$ sensors is then randomly selected for use in reconstruction.
 			The selected data $y(n)$ is represented as
@@ -142,6 +133,8 @@
 					\mathbf{R}(n) \Psi_{IDFT}\ \mathbf{\hat{v}}(n) = \mathbf{y}(n)
 			\end{equation}
 			%
+			
+			
 			The minimum number of samples needed for sufficient sensing $N_s$ is stated in theory to be
 			%
 			\begin{equation}
@@ -209,10 +202,10 @@
 			% sub-subsection random_access (end)
 
 
-		\subsubsection{Suggestions for improving the RACS method} % (fold)
+		\subsubsection{Suggestions for Improving the RACS Method} % (fold)
 		\label{sub:suggestions_for_improving_the_racs_method}
 
-			Two suggestions for improving RACS as proposed by \cite{Fazel2011a} are presented below.
+			Two suggestions for improving RACS as proposed by \cite{Fazel2011} are presented below.
 			One is on the choice of basis, the other on the way spatial data is aggregated into a vector for use with CS.
 
 			\paragraph{Choice of Basis} % (fold)
@@ -230,14 +223,23 @@
 
 				% paragraph choice_of_basis (end)
 
-			\paragraph{Vectorization of data map} % (fold)
+			\paragraph{Vectorization of Data Mmoeap} % (fold)moe
 			\label{par:vectorization_of_data_map}
 
-			As described in Section \ref{sub:compressive_sensing_in_spatial_domain}
-			
+				As described in Section \ref{sub:compressive_sensing_in_spatial_domain} the data map (\ref{eq:dataMap})) is vectorized by `simply' stacking the columns.
+
+				I suspect that on top of the unavoidable periodicity that the vectorization imparts, a large amount of discontinuities are like to occur.
+				This is because the data is very unlikely to be similar at different boundaries.
+				These discontinuities cause strong harmonics and reduces the rate of convergence an therefore the sparsity of the signal.
+				This reduces the efficiency of CS.
+
+				My suggestion is to vectorize the matrix by scanning it in a snake pattern, going from top left, moving left to right till the end of the row, moving one row down, going right to left till the end of the row, moving one row down etc.
+
+				This method is inspired by the fact that the signal is assumed slowly varying in space.
+				This fact means that, moving in the described snake pattern, it is unlikely to have large discontinuities, unless they are actually present in the original data.
+
 				% paragraph vectorization_of_data_map (end)
 		
-
 			% subsection suggestions_for_improving_the_racs_method (end)
 
 		% subsection random_access_compressive_sensing (end)
