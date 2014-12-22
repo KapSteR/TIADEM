@@ -82,4 +82,4 @@ end
 
 
 
-save('DATA\OptimumNsMSELogSnakeOffReally', 'NormError', 'M', 'snake')
+% save('DATA\OptimumNsMSELogSnakeOffReally', 'NormError', 'M', 'snake')

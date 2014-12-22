@@ -23,9 +23,11 @@ semilogy(M_off,Error_off)
 hold on
 semilogy(M_on,Error_on)
 hold off
+line([M_off(1) M_off(end)], [10^-3 10^-3], 'color', 'k', 'LineStyle','--')
 xlabel('Number of measurements (M)')
 ylabel('Average normalized error')
 title('Estimation of N_s')
+legend('Regular', 'With snake pattern','Target error (0.001)')
 grid on
 grid minor
 

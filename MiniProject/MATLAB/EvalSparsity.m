@@ -9,7 +9,7 @@ N = I*J;
 % Xi = kron(dftmtx(I),dftmtx(J)); % fft
 Xi = dctmtx(N);                 % dct
 
-snake = false;
+snake = true;
 
 if snake
 % Make snake pattern
