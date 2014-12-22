@@ -30,11 +30,13 @@ u = reshape(sstDataC',[N,1]);	% Rows
 
 %% Start iterating 
 
-M = logspace(0,4,10)
+M = [4000:500:5000]
 n_iters = numel(M);
-MSE = zeros(n_iters,1);
 n_retry = 10;
-mse = zeros(n_retry,1);
+% MSE = zeros(n_iters,1);
+% mse = zeros(n_retry,1);
+NormError = zeros(n_iters,1);
+normError = zeros(n_retry,1);
 
 figure(1)
 	clf(1)
@@ -58,15 +60,17 @@ for i = 1:n_iters
 
 		u_h=Xi'*v_h;
 
-		mse(j) = sum((u-u_h).^2)/N;
+		% mse(j) = sum((u-u_h).^2)/N;
+		normError(j) = norm(u_h-u)/norm(u);
 
 	end
 
-	MSE(i) = mean(mse);
+	% MSE(i) = mean(mse);
+	NormError(i) = mean(normError)
 
-	save('DATA\OptimumNsMSESnake', 'MSE', 'M')
+	save('DATA\OptimumNsMSELogSnakeOff2', 'NormError', 'M')
 
-	semilogy(M,MSE/max(MSE))
+	semilogy(M,NormError)
 	drawnow
 
 	toc

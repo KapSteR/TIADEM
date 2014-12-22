@@ -3,9 +3,15 @@ clc; clear;
 
 
 %% Input SST data
-load('DATA\OptimumNsMSESnake.mat')
+NormError1 = load('DATA\OptimumNsMSElogSnakeOff.mat')
 figure(3)
-semilogy(M(1:end-1),MSE(1:end-1))
+
+M1 = NormError1.M;
+Error1 = NormError1.NormError;
+
+
+
+semilogy(M,MSE(1:end-1))
 
 
 xlabel('Number of measurements (M)')
