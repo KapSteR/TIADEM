@@ -57,6 +57,7 @@ sstDataC = sstData_raw - tempOffset;
 save('DATA\SST_data_subset.mat');
 
 
+%% Visualize
 figure(2)
 clf
 contourf(...
@@ -66,8 +67,6 @@ contourf(...
     100, ...                                            Number of levels
     'LineStyle','none' ...                              Hide lines
 );
-
-%% Visualize
 
 % colormap('parula')
 colormap('jet')

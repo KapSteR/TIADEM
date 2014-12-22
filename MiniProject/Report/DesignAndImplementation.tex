@@ -8,6 +8,15 @@
 
 	\subsection{Data Input} % (fold)
 	\label{sub:data_input}
+
+		The MATLAB script \emph{InputData.m} uses build in functions to extract data from the downloaded G1SST database.
+		It takes as input an upper and lower bound and an eastern and western bound in between which it is supposed to a square set of data.
+
+		The data is converted from Kelvin to Celsius, to make it more semantically understandable.
+		The data is then saved to a \emph{.mat}-file for use in other scripts.
+
+		Finally the data is shown on a colored contour-plot (see Figure \ref{fig:ExampleSSTData}), for illustration and inspection purposes.
+
 	
 		% subsection data_input (end)
 
