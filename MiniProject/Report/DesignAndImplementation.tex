@@ -22,6 +22,24 @@
 
 	\subsection{Sparsity Estimation} % (fold)
 	\label{sub:sparsity_estimation}
+
+		The MATLAB script \emph{EvalSparsity.m} takes as input to \emph{.mat}-file described in Section \ref{sub:data_input}.
+
+		It vectorizes the data map by stacking either the rows or the columns.
+		It then evaluates the sparsity by taking either the DFT or the DCT of the signal.
+		The sparsity is the number, $k$, of coefficients greater than 10 or 0.1, respectively.
+
+		It then tries to do a reconstruction using $M = 6*k$ randomly selected samples, and calculates the normalized error:
+		%
+		\begin{equation}
+			e_{normalized} = \frac
+				{\|\mathbf{\hat{u}}(n) - \mathbf{u}(n)\|_{l2}}
+				{\|\mathbf{u}(n)\|_{l2}}
+		\end{equation}
+
+
+
+
 	
 		% subsection sparsity_estimation (end)
 
@@ -41,9 +59,9 @@
 		% subsection simulation_of_random_access_transmission (end)
 
 	\subsection{Data Reconstruction (Sensor Fusion)} % (fold)
-	\label{sub:data_reconstruction_}
+	\label{sub:data_reconstruction}
 	
-		% subsection data_reconstruction_ (end)
+		% subsection data_reconstruction (end)
 
 	
 	\subsection{Comparison of Suggested Methods} % (fold)

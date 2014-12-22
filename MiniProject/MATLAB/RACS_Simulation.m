@@ -163,7 +163,8 @@ tic
         end
     end
 
-    MSE = sum(sum((sstDataC - sstDataR).^2))/N
+    % MSE = sum(sum((sstDataC - sstDataR).^2))/N
+    normalizedError = norm(u_h-u)/norm(u)
 
 %% Visualize
     disp('Visualize');

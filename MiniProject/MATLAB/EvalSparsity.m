@@ -30,7 +30,7 @@ subplot(222)
 semilogy(abs(Xi*u))
 
 M = 6*k
-M = 2500
+% M = 2500
 %%
 select = randperm(N,M);
 
@@ -45,6 +45,8 @@ u_h=Xi'*v_h;
 
 % sstDataR = reshape(u_h,[I,J])		% Columns
 sstDataR = reshape(u_h,[J,I])';		% Rows
+
+normalizedError = norm(u_h-u)/norm(u)
 
 %% Visualize
 figure(1)
