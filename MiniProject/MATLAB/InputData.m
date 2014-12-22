@@ -31,6 +31,14 @@ lowerBound = 55.25;
 leftBound = 5.7;
 rightBound = 6.7;
 
+% % Positive north
+% upperBound = 56;
+% lowerBound = 55.5;
+
+% % Positive east
+% leftBound = 4;
+% rightBound = 6;
+
 % Find index plus zero offset
 northIndex = upperBound*latStep + (16000/2);
 southIndex = lowerBound*latStep +(16000/2);
