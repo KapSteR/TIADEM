@@ -43,6 +43,7 @@
 		The power does however not taper off as rapidly as one would like.
 		Especially, there are some powerful harmonics present.
 		A suggestion for reducing these were presented in Section \ref{par:vectorization_of_data_map} and will be tested in Section \ref{sub:comparison_of_suggested_methods}.
+		\fxnote{Rewrite above, compare methods here}
 
 		Another way of determining the sufficient number of samples, $N_S$ required for reconstruction is by doing is experimentally.
 		This process entails attempting reconstruction with an increasing number of samples available, and seeing when the error has decreased enough.
@@ -83,7 +84,30 @@
 	\subsection{Simulation of Random Access Transmission} % (fold)
 	\label{sub:simulation_of_random_access_transmission}
 
+		The MATALB function \texttt{TransmissionSimulation.m} simulates RACS random access protocol.
+		It takes as input, The number of sensors $N$, the probability of sensing $p$, the packet transmission time $T_p$ and the frame period $T$.
 
+		It does this by first selecting a random set of $M$ sensors for sensing.
+		Each sensor selected for sensing is assigned a random time to start transmission $\theta_i$ distributed uniformly in the range $[0 ; T - T_p]$.
+
+		All the indexes of the sensors selected for sensing are initially put in the set of received sensors.
+		Then one-by-one for each selected sensor $i$ it is tested if 
+		$\theta_i - T_p < \theta_j < \theta_i + T_p$
+		for any
+		$j \neq i$.
+		If so, the index of sensor $i$ is removed from the set of received sensors.
+
+		When all sensors have been tested for collision, the function returns a list of indexes of successfully received sensors $receiveIndex$, the number of sensors selected for sensing $M$ and the number of successfully received sensors $k$.
+
+		In Figure \ref{fig:Mean_k_vs_p} below \texttt{TransmissionSimulation.m} is compared with the binomial model (\ref{eq:BinomialModel}) presented in Section \ref{sub:random_access}.
+
+		\begin{figure}[H]
+			\centering 
+			\includegraphics[width=\textwidth]{FindOptimumNsSnakeOff.eps}
+			\caption{
+				Results of running \texttt{FindOptimumNs.m} on a patch of data from the North Sea. As can be seen from the figure, a $N_s \approx 3500$ is sufficient, consistent with results above.}
+			\label{fig:Mean_k_vs_p}
+		\end{figure}
 
 		\fxnote{Mean K vs p figure}
 		\fxnote{reconstruction error vs p figure}

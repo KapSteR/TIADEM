@@ -12,7 +12,7 @@ N = I*J;
 % Xi = kron(dftmtx(I),dftmtx(J)); % fft
 Xi = dctmtx(N);                 % dct
 
-snake = true;
+snake = false;
 
 if snake
 % Make snake pattern
@@ -30,7 +30,8 @@ u = reshape(sstDataC',[N,1]);	% Rows
 
 %% Start iterating 
 
-M = [4000:500:5000]
+M = [1 3 8 22 60 167 464 1292 3594 4000 4500 5000]
+
 n_iters = numel(M);
 n_retry = 10;
 % MSE = zeros(n_iters,1);
@@ -79,6 +80,6 @@ for i = 1:n_iters
 
 end
 
-NormError = cell2mat(NormError);
 
-save('DATA\OptimumNsMSELogSnakeOff2', 'NormError', 'M')
+
+save('DATA\OptimumNsMSELogSnakeOffReally', 'NormError', 'M', 'snake')
