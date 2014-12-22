@@ -12,9 +12,10 @@ tic
     % Packet time
     Tp = 0.200 % seconds
 
-    % Frame time 3 hour(s)
+    % Frame time: 3 hour(s)
     T = 3600*3 % seconds
 
+    % Enable/Disable snake pattern (true = enable / false = disable)
     snake = true;
 
 %% Input data
@@ -148,7 +149,7 @@ tic
 
     v_h=SolveBP(R*Xi', y, N);
 
-    u_h=Xi'*v_h;
+    u_h=real(Xi'*v_h);
 
     % sstDataR = reshape(u_h,[I,J])		% Columns
     sstDataR = reshape(u_h,[J,I])';		% Rows

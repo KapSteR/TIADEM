@@ -43,7 +43,7 @@
 		The power does however not taper off as rapidly as one would like.
 		Especially, there are some powerful harmonics present.
 
-		When \texttt{snake} is set to \texttt{true}, enabling the use of the snake pattern, the amount of harmonic overtones present is greatly reduced, as seen in Figure \fxnote{Insert figure}.
+		When \texttt{snake} is set to \texttt{true}, enabling the use of the snake pattern, the amount of harmonic overtones present is greatly reduced, as seen in Figure \ref{fig:ExEvalSparseSnakeOn}.
 		This results in much greater performance, as the level of error is maintained while the number of samples used is \emph{reduced to one third}. 
 
 		Another way of determining the sufficient number of samples, $N_S$ required for reconstruction is by doing is experimentally.
@@ -67,7 +67,7 @@
 			\includegraphics[width=\textwidth]{ExEvalSparseSnakeOn.eps}
 			\caption{
 				Results of running \texttt{EvalSparsity.m} on a patch of data from the North Sea with snake pattern enabled.}
-			\label{fig:ExEvalSparseSnakeOff}
+			\label{fig:ExEvalSparseSnakeOn}
 		\end{figure}
 
 		\begin{figure}[H]
@@ -120,7 +120,6 @@
 			\label{fig:Mean_k_vs_p}
 		\end{figure}
 
-		\fxnote{Mean K vs p figure}
 		\fxnote{reconstruction error vs p figure}
 	
 		% subsection simulation_of_random_access_transmission (end)
@@ -138,13 +137,16 @@
 	
 		% subsection data_reconstruction (end)
 
-	
-	\subsection{Comparison of Suggested Methods} % (fold)
-	\label{sub:comparison_of_suggested_methods}
+	\subsection{Full Simulation} % (fold)
+		\label{sub:full_simulation}
 
-		\fxnote{comparison of signal and DCT with and without snake}
-	
-		% subsection comparison_of_suggested_methods (end)
+		The MATALB script \texttt{RACS\_Simulation.m} simulates a full RACS frame.
+		It takes the network specifications (Probability of sufficient sensing $P_s$, Frame time $T$ and Packet transmission time $T_p$) and the data as input.
+		Then it goes trough the entire process of estimating sparsity, determining probability of sensing $p_s$, simulating transmission, reconstructing the data map and calculating the normalized error.
+
+		Finally the results are plotted for visualization and verification.
+		
+		% subsection full_simulation (end)
 
 	% section design_and_implementation (end)
 

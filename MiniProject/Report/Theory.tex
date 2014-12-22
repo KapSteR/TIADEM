@@ -136,9 +136,9 @@
 			%
 			where $S$ is the sparsity of the signal and $C$ is a constant, independent of $N$ and $S$.
 			The authors of RACS refer to \cite{Candes2006} for a upper bound on C.
-			Another method is to determine $N_s$ experimentally.
-			This method often produces even lower numbers for $N_s$ than (\ref{eq:NsTheory})).
-			\fxnote{insert figure}
+			Another method is to determine $N_s$ empirically.
+			This method can often produce even lower numbers for $N_s$ than (\ref{eq:NsTheory})).
+			For an example, see Section \ref{sub:sparsity_estimation}.
 		
 			% sub-subsection compressive_sensing_in_spatial_domain (end)
 
@@ -222,9 +222,9 @@
 
 				As described in Section \ref{sub:compressive_sensing_in_spatial_domain} the data map (\ref{eq:dataMap})) is vectorized by `simply' stacking the columns.
 
-				I suspect that on top of the unavoidable periodicity that the vectorization imparts, a large amount of discontinuities are like to occur.
+				I suspect that on top of the unavoidable periodicity that the vectorization imparts, a large amount of discontinuities are likely to occur.
 				This is because the data is very unlikely to be similar at different boundaries.
-				These discontinuities cause strong harmonics and reduces the rate of convergence an therefore the sparsity of the signal.
+				These discontinuities cause strong harmonic overtones and reduces the rate of convergence and therefore the sparsity of the signal.
 				This reduces the efficiency of CS.
 
 				My suggestion is to vectorize the matrix by scanning it in a snake pattern, going from top left, moving left to right till the end of the row, moving one row down, going right to left till the end of the row, moving one row down etc.
