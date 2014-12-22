@@ -4,22 +4,17 @@ clc; clear;
 
 %% Input SST data
 NormError1 = load('DATA\OptimumNsMSElogSnakeOff.mat')
-figure(3)
-
 M = NormError1.M;
 Error = NormError1.NormError;
 
-NormError2 = load('DATA\OptimumNsMSElogSnakeOff.mat')
+NormError2 = load('DATA\OptimumNsMSElogSnakeOff2.mat')
+
+M = [M(1:end-1) NormError2.M];
+Error = [Error(1:end-1) ; NormError2.NormError];
+
+
 figure(3)
-
-M = [M NormError2.M];
-Error = [Error NormError1.NormError];
-
-
-
 semilogy(M,Error)
-
-
 xlabel('Number of measurements (M)')
 ylabel('Average normalized error')
 title('Estimation of N_s')

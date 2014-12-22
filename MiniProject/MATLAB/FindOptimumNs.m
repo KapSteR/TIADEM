@@ -30,9 +30,9 @@ u = reshape(sstDataC',[N,1]);	% Rows
 
 %% Start iterating 
 
-M = [4000:500:5000]/100
+M = [4000:500:5000]
 n_iters = numel(M);
-n_retry = 12;
+n_retry = 10;
 % MSE = zeros(n_iters,1);
 % mse = zeros(n_retry,1);
 NormError = zeros(n_iters,1);
