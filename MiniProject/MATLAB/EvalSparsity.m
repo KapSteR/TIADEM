@@ -9,6 +9,17 @@ N = I*J;
 % Xi = kron(dftmtx(I),dftmtx(J)); % fft
 Xi = dctmtx(N);                 % dct
 
+snake = false;
+
+if snake
+% Make snake pattern
+    for i = 2:2:(I - mod(I,2)) % Mod2 used to compensate in case of odd number of rows
+
+        sstDataC(i,:) = fliplr(sstDataC(i,:));
+
+    end
+end
+
 u = reshape(sstDataC,[N,1]);	% Columns
 u = reshape(sstDataC',[N,1]);	% Rows
 % u = sstDataC(:);
@@ -46,6 +57,16 @@ u_h=Xi'*v_h;
 % sstDataR = reshape(u_h,[I,J])		% Columns
 sstDataR = reshape(u_h,[J,I])';		% Rows
 
+if snake
+    % Undo snake pattern
+    for i = 2:2:(I - mod(I,2)) % Mod2 used to compensate in case of odd number of rows
+
+        sstDataR(i,:) = fliplr(sstDataR(i,:));
+        sstDataC(i,:) = fliplr(sstDataC(i,:));
+
+    end
+end
+
 normalizedError = norm(u_h-u)/norm(u)
 
 %% Visualize
@@ -54,11 +75,17 @@ subplot(221)
 hold on
 plot(real(u_h))
 legend('original', 'recovered');
+title('Vectorized datamap')
+xlabel('Data point index')
+ylabel('Temperature [C]')
 
 subplot(222)
 hold on
 semilogy(abs(v_h))
 legend('original', 'recovered');
+title(['DCT | k = ' num2str(k) ', M = ' num2str(M) ', Snake enabled = ' num2str(snake)])
+xlabel('Coefficient index')
+ylabel('Magnitude')
 
 
 subplot(223)
@@ -79,7 +106,7 @@ xlabel('Degrees East')
 ylabel('Degrees North')
 grid on
 grid minor
-title(['Original Sea Surface Temperature ' dateOfCollection])
+title(['Original Sea Surface Temperature'])
 
 subplot(224)
 contourf(...
@@ -90,8 +117,6 @@ contourf(...
     'LineStyle','none' ...                              Hide lines
 );
 
-%% Visualize
-
 % colormap('parula')
 colormap('jet')
 colorbar
@@ -99,8 +124,9 @@ xlabel('Degrees East')
 ylabel('Degrees North')
 grid on
 grid minor
-title(['Recovered Sea Surface Temperature ' dateOfCollection])
+title(['Recovered SST | Norm error = ' num2str(normalizedError)])
 
+hold off
 
 
 

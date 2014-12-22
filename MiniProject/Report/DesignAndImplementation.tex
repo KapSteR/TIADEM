@@ -26,9 +26,10 @@
 		The MATLAB script \emph{EvalSparsity.m} takes as input to \emph{.mat}-file described in Section \ref{sub:data_input}.
 
 		It vectorizes the data map by stacking either the rows or the columns.
-		It then evaluates the sparsity by taking either the DFT or the DCT of the signal.
-		The sparsity is the number, $k$, of coefficients greater than 10 or 0.1, respectively.
+		The snake pattern, described in Section \ref{par:vectorization_of_data_map} is also implemented, and is enabled by a boolean \texttt{snake}.
 
+		Then it evaluates the sparsity by taking either the DFT or the DCT of the signal.
+		The sparsity is the number, $k$, of coefficients greater than 10 or 0.1, respectively.
 		It then tries to do a reconstruction using $M = 6*k$ randomly selected samples, and calculates the normalized error:
 		%
 		\begin{equation}
@@ -37,6 +38,14 @@
 				{\|\mathbf{u}(n)\|_{l2}}
 		\end{equation}
 
+		In Figure \ref{fig:ExEvalSparseSnakeOff} below
+
+		\begin{figure}[H]
+			\centering 
+			\includegraphics[width=\textwidth]{ExEvalSparseSnakeOff.eps}
+			\caption{Results of running \texttt{EvalSparsity.m} on a patch of data from the North Sea}
+			\label{fig:ExEvalSparseSnakeOff}
+		\end{figure}
 
 
 

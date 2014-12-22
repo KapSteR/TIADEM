@@ -31,7 +31,7 @@ tic
 
     if snake
     % Make snake pattern
-        for i = 2:2:I
+        for i = 2:2:(I - mod(I,2)) % Mod2 used to compensate in case of odd number of rows
 
             sstDataC(i,:) = fliplr(sstDataC(i,:));
 
@@ -60,7 +60,7 @@ tic
     subplot(222)
     semilogy(abs(Xi*u))
     xlabel('Coefficient index')
-    ylabel('Magnitude [C]')
+    ylabel('Magnitude')
     title('DCT Transform')
     drawnow
 
@@ -155,7 +155,7 @@ tic
 
     if snake
     % Undo snake pattern
-        for i = 2:2:I
+        for i = 2:2:(I - mod(I,2)) % Mod2 used to compensate in case of odd number of rows
 
             sstDataR(i,:) = fliplr(sstDataR(i,:));
             sstDataC(i,:) = fliplr(sstDataC(i,:));
@@ -166,19 +166,19 @@ tic
     % MSE = sum(sum((sstDataC - sstDataR).^2))/N
     normalizedError = norm(u_h-u)/norm(u)
 
-%% Visualize
-    disp('Visualize');
-    toc
+    %% Visualize
     figure(1)
     subplot(221)
     hold on
     plot(real(u_h))
     legend('original', 'recovered');
+    title('Vectorized datamap')
 
     subplot(222)
     hold on
     semilogy(abs(v_h))
     legend('original', 'recovered');
+    title(['DCT | k = ' num2str(k) ', M = ' num2str(M) ', Snake enabled = ' num2str(snake)])
 
 
     subplot(223)
@@ -199,7 +199,7 @@ tic
     ylabel('Degrees North')
     grid on
     grid minor
-    title(['Original Sea Surface Temperature ' dateOfCollection])
+    title(['Original Sea Surface Temperature'])
 
     subplot(224)
     contourf(...
@@ -217,8 +217,9 @@ tic
     ylabel('Degrees North')
     grid on
     grid minor
-    title(['Recovered Sea Surface Temperature ' dateOfCollection])
+    title(['Recovered SST | Norm error = ' num2str(normalizedError)])
 
+    hold off
 
 disp('Done');
 toc
