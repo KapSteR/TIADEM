@@ -9,14 +9,14 @@ N = 5000;
 Tp = 0.200;	% seconds
 
 % Frame time 3 hours
-T = 3600; % seconds
+T = 1800; % seconds
 
 
 
 p = 0:0.05:1;
 n_iters = numel(p)
 
-n_retry = 10;
+n_retry = 5;
 j = 1;
 tic
 for i = 1:n_iters;
@@ -31,12 +31,13 @@ for i = 1:n_iters;
 
 		k_sim_temp(j) = numel(TransmissionSimulation(N, p(i), Tp, T));
 		% k_sim(i,j) = numel(TransmissionSimulation(N, p(i), Tp, T));
+		j
 
 	end
 
 	k_sim(i) = mean(k_sim_temp);
 
-	i
+	p(i)
 	toc
 
 end
@@ -53,6 +54,7 @@ hold off
 
 xlabel('p')
 ylabel('Average number of collision-free packets')
-legend('Binomial model', 'Simulated results')
-title('Collision-free packets')
+legend('Binomial model', 'Simulated results', 'Location','southeast')
+title(['Collision-free packets | T = ' num2str(T) ', T_p = ' num2str(Tp)])
+grid on
 grid minor

@@ -113,7 +113,7 @@
 					= \mathbf{R}(n) \Psi_{IDFT}\ \mathbf{v}(n) + \mathbf{z}(n)
 			\end{equation}
 			%
-			where $\mathbf{R}(n)$ is an $M \times N$ random selection matrix consisting of $M$ rows of $I^N$ selected uniformly at random.
+			where $\mathbf{R}(n)$ is an $M \times N$ random binary selection matrix consisting of $M$ rows of $I^N$ selected uniformly at random.
 
 			The reconstruction problem is then:
 			%
@@ -122,6 +122,7 @@
 					\|\mathbf{\hat{v}}(n)\|_{l_1} 
 					\ \ \text{subject to} \ \ 
 					\mathbf{R}(n) \Psi_{IDFT}\ \mathbf{\hat{v}}(n) = \mathbf{y}(n)
+					\label{eq:minimizationProblem}
 			\end{equation}
 			%
 			This can be solved as a convex optimization problem, and a number of MATLAB tools are available to do so e.g. Sparselab \cite{SparseLab:Online} and CVX \cite{CVX:Online}

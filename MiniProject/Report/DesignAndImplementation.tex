@@ -45,8 +45,6 @@
 
 		When \texttt{snake} is set to \texttt{true}, enabling the use of the snake pattern, the amount of harmonic overtones present is greatly reduced, as seen in Figure \fxnote{Insert figure}.
 		This results in much greater performance, as the level of error is maintained while the number of samples used is \emph{reduced to one third}. 
-		% A suggestion for reducing these were presented in Section \ref{par:vectorization_of_data_map} and will be tested in Section \ref{sub:comparison_of_suggested_methods}.
-		\fxnote{Rewrite above, compare methods here}
 
 		Another way of determining the sufficient number of samples, $N_S$ required for reconstruction is by doing is experimentally.
 		This process entails attempting reconstruction with an increasing number of samples available, and seeing when the error has decreased enough.
@@ -89,7 +87,7 @@
 	\label{sub:estimaton_of_q_s_and_p_s_}
 
 		With an estimate of $N_s$, you can now calculate the required sensing probability, $p_s$.
-	
+		\fxfatal{WRITE $p_s$ / $q_s$ SECTION!!!!} 
 		% subsection estimaton_of_q_s_and_p_s_ (end)
 
 	\subsection{Simulation of Random Access Transmission} % (fold)
@@ -114,9 +112,11 @@
 
 		\begin{figure}[H]
 			\centering 
-			\includegraphics[width=\textwidth]{FindOptimumNsSnakeOff.eps}
-			\caption{
-				Results of running \texttt{FindOptimumNs.m} on a patch of data from the North Sea. As can be seen from the figure, a $N_s \approx 3500$ is sufficient, consistent with results above.}
+			\includegraphics[width=\textwidth]{Mean_k_vs_p.eps}
+			\caption{Comparison of \texttt{TransmissionSimulation.m} and binomial model. Averaged over 5 simulation runs.
+			Number of sensors $N = 5000$.
+			Frame time $T = 1800\ s = \sfrac{1}{2}\ hour$.
+			Packet transmission time $T_p = 200\ ms$}
 			\label{fig:Mean_k_vs_p}
 		\end{figure}
 
@@ -127,6 +127,14 @@
 
 	\subsection{Data Reconstruction (Sensor Fusion)} % (fold)
 	\label{sub:data_reconstruction}
+
+		Reconstructing data from a subset of all the data is a matter of solving the convex optimization problem (\ref{eq:minimizationProblem}) presented in Section \ref{sub:compressive_sensing_in_spatial_domain}.
+		In this project this is done using the the MATLAB function \texttt{SolveBP.m} from the toolbox called Sparelab \cite{SparseLab:Online}.
+		
+		This function takes as input the augmented basis $\Phi'$, which is the selection matrix $R$ multiplied with the selected basis $\Psi$, the received vector $y$ and the total number of sensors $N$.
+		It then uses the \emph{Basis Pursuit} method to solve the problem and returns a reconstructed vector.
+		It is then only a matter of reshaping the vector back into a matrix, and you have the reconstructed data map.
+
 	
 		% subsection data_reconstruction (end)
 
