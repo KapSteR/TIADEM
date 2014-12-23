@@ -5,14 +5,23 @@
 	\section{Conclusion} % (fold)
 	\label{sec:conclusion}
 
-	\fxfatal{WRITE CONCULSION!!!} 
+		In this project a simulation of RACS in MATLAB was successfully implemented.
+		The results presented in this report confirms the theory put forth by \cite{Fazel2011}.
+		Overall the results point to RACS being very beneficial for wireless sensor networks in general, not just underwater networks.
+		The savings in energy consumption from not just compressing data, but deliberately omitting sensing and transmitting, unless selected are significant, with very limited loss in fidelity of the data.
+		
+		Also, the proposed random access protocol completely frees the nodes from listening, further saving energy.
+		In general, the decentralized nature of the protocol makes efficient implementation easy, with little computational overhead.
 
-	
+		The RACS method seems to have issues with harmonic overtones in the signal vector stemming from discontinuities introduced by stacking the columns of the data map.
+		In this report suggestions for improving the RACS method was presented.
+		Especially, a suggestion for changing the way the data map was indexed has shown promise.
+		The \emph{snake} method has in this project shown itself to be able to reduce the compression ratio by \emph{one third} compared to regular RACS.
+		
+		To accurately state the potential of this method, further analysis and test is necessary.
+		The indication is however that it has the potential to very significantly improve the compression performance of RACS, and by extension network energy consumption and hence network lifetime, in a power constrained network.
 
-		% Something about:
-			% Something about discontinuities when vectorizing space causing harmonics (less sparsity)
-
-			
+				
 		% section conclusion (end)
 
 \end{document}
