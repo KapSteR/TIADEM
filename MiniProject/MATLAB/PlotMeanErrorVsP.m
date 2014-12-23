@@ -19,9 +19,11 @@ Error_off = NormError.AvNormalizedError;
     hold on
     semilogy(p_on,Error_on)
     hold off
-    % line([M_off(1) M_off(end)], [10^-3 10^-3], 'color', 'k', 'LineStyle','--')
+    line([p_on(1) p_on(end)], [10^-3 10^-3], 'color', 'k', 'LineStyle','--')
     xlabel('Probability of sensing (p_s)')
     ylabel('Average normalized error')
     title('Average normalized error vs. p_s')
+    legend('Regular', 'With snake pattern','Target error (0.001)')
+ 
     grid on
     grid minor

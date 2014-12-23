@@ -175,8 +175,22 @@
 			\label{fig:Mean_k_vs_p}
 		\end{figure}
 
-		\fxnote{reconstruction error vs p figure}
+		\begin{figure}[H]
+			\centering 
+			\includegraphics[width=0.9\textwidth]{Mean_error_vs_p.eps}
+			\caption{\fxnote{rest of caption}
+			Number of sensors $N = 5000$.
+			Frame time $T = 1800\ s = \sfrac{1}{2}\ hour$.
+			Packet transmission time $T_p = 200\ ms$}
+			\label{fig:Mean_error_vs_p}
+		\end{figure}
 	
+		In Figure \ref{fig:Mean_error_vs_p} the normalized error is plotted against $p_s$ for the same system parameters as above, averaged over 10 simulation runs.
+		It can be seen that, with the snake pattern enabled, the target error is reached with $p_s \approx 0.3$, consistent with $N_s \approx 1100$ as seen in Figure \ref{fig:Mean_k_vs_p}.
+
+		Further, Figure \ref{fig:Mean_error_vs_p} shows that, with regular RACS, the target error is never reached for any $p_s$.
+		This is also consistent with Figure \ref{fig:Mean_k_vs_p}, as it shows that for no $p_s$ does the average number of received packets reach the required $N_S \approx 3500$, because of too many collisions.
+
 		% subsection simulation_of_random_access_transmission (end)
 
 	\subsection{Data Reconstruction (Sensor Fusion)} % (fold)
