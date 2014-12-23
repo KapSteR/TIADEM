@@ -148,7 +148,7 @@
 
 			The proposed RACS scheme is as follows:
 
-			\begin{enumerate}[label=\bfseries Step \arabic*:]
+			\begin{enumerate}[label=\bfseries \arabic*:]
 				\item 
 					At the beginning of each frame a sensor node $i$ randomly chooses to participate in sensing with probability $p$, or stay inactive.
 				\item 
@@ -187,15 +187,14 @@
 			\end{equation}
 			%
 			Using (\ref{eq:CCDF}), a sufficient probability of a packet arriving without collision, $q_s$ can be found numerically.
-			\fxwarning{Insert figure?}
-			With $q_s$ one can then solve (\ref{eq:q_of_p})) for $p_s$.
-			\fxwarning{Figure again}.
+			With $q_s$ one can then solve (\ref{eq:q_of_p}) for $p_s$.
+			\footnote{See Section \ref{sub:estimaton_of_q_s_and_p_s} for a description of how this is done in this project and some examples.}
 			It is important to note here, that a solution of $p_s$ for a given $q_s, N, T$ and $T_p$ does not necessarily exit.
-			This is because constraints on bandwidth, described by $T$ and $T_p$, may prevent enough packets from arriving, even even if enough are sending because of collisions.
+			This is because constraints on bandwidth, described by $T$ and $T_p$, may prevent enough packets from arriving, even if enough sensors are sending, because of collisions.
 
 			% sub-subsection random_access (end)
 
-
+		\newpage
 		\subsubsection{Suggestions for Improving the RACS Method} % (fold)
 		\label{sub:suggestions_for_improving_the_racs_method}
 

@@ -8,7 +8,7 @@ Error_on = NormError1.AvNormalizedError;
 
 %% Input SST data
 NormError = load('DATA\MVP_SnakeOff.mat')
-p_of = NormError.M;
+p_off = NormError.p_test;
 Error_off = NormError.AvNormalizedError;
 
 %% Visualize

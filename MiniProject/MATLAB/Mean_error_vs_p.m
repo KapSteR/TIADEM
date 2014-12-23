@@ -11,7 +11,7 @@ clear; clc;
     T = 1800 % seconds
 
     % Enable/Disable snake pattern (true = enable / false = disable)
-    snake = false;
+    snake = true;
 
 %% Input data
     disp('Input data');
@@ -99,4 +99,4 @@ clear; clc;
         toc
     end
 
-save('DATA\MVP_SnakeOff', 'p_test', 'AvNormalizedError', 'snake');
+save('DATA\MVP_SnakeOn', 'p_test', 'AvNormalizedError', 'snake');

@@ -15,24 +15,12 @@ Ps = 0.90;
 % Packet time
 Tp = 0.200;	% seconds
 
-% Frame time 3 hours
+% Frame time 1 hours
 T = 3600; % seconds
-
-% Coherence time (assumed to be large ie. 1 hour)
-Tcoh = T; 	% seconds 
-
-C = 2;
-
-S = 500;
-% S = 200;
-
-
 
 
 %% Calculate sensing probability
-
-% Ns = C*S*log10(N);
-Ns = 2500;
+Ns = 1100;
 
 k = Ns;
 

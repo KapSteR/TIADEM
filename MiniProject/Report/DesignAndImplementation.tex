@@ -84,11 +84,66 @@
 		% subsection sparsity_estimation (end)
 
 	\subsection{Estimaton of $q_s$ and $p_s$} % (fold)
-	\label{sub:estimaton_of_q_s_and_p_s_}
+	\label{sub:estimaton_of_q_s_and_p_s}
 
 		With an estimate of $N_s$, you can now calculate the required sensing probability, $p_s$.
-		\fxfatal{WRITE $p_s$ / $q_s$ SECTION!!!!} 
+		This is done by the MATLAB script \texttt{SensingProbability.m}.
+		It takes the network specifications (Probability of sufficient sensing $P_s$, Frame time $T$, Packet transmission time $T_p$ and Total number of sensors $N$) and $N_s$ as input.
+
+		It first uses the Complementary Cumulative Distribution Function $Q_K(k)$ (see (\ref{eq:CCDF})) to numerically search for a $q_s$ that satisfies 
+		%
+		\begin{equation}
+			Q_K(N_s) \geq P_s
+		\end{equation}
+		%
+		as shown in Figure \ref{fig:q_s_Example}.
+
+		\begin{figure}[H]
+			\centering 
+			\includegraphics[width=0.8\textwidth]{q_s_Example.eps}
+			\caption{
+				Search for $q_s$ given: 
+				$P_s = 0.90$, 
+				$N = 5000$ and
+				$N_s = 1100$ | 
+				$q_s = 0.228$
+			}
+			\label{fig:q_s_Example}
+		\end{figure}
+
+		Then another numeric search is performed to find the minimum necessary $p_s$ that satisfies
+		%
+		\begin{equation}
+			q_s =
+				e^{
+					-2\frac
+						{Np_sT_p}
+						{T-T_p}
+					}
+			\label{eq:qs_from_ps}
+		\end{equation}
+		%
+		as shown in Figure \ref{fig:p_s_Example}.
+
+		\begin{figure}[H]
+			\centering 
+			\includegraphics[width=0.8\textwidth]{p_s_Example.eps}
+			\caption{
+				Search for $p_s$ given:
+				$q_s = 0.228$, 
+				$T_p = 200\ ms$, 
+				$T = 1\ hour = 3600\ s$  and
+				$N = 5000$ |
+				$p_s = 0.265$ 
+			}
+			\label{fig:p_s_Example}
+		\end{figure}
+
+		If a solution for (\ref{eq:qs_from_ps}) does not exits, it means that the probability of sufficient sensing is infeasible with the given bandwidth and frame time.
+		In this case the script returns an error.
+
 		% subsection estimaton_of_q_s_and_p_s_ (end)
+
 
 	\subsection{Simulation of Random Access Transmission} % (fold)
 	\label{sub:simulation_of_random_access_transmission}

@@ -19,13 +19,14 @@ Error_off = NormError.NormError;
 
 figure(3)
 clf(3)
-semilogy(M_off,Error_off)
+semilogy(M_off(1:end-1),Error_off(1:end-1))
 hold on
-semilogy(M_on,Error_on)
+semilogy(M_on(1:end-1),Error_on(1:end-1))
 hold off
 line([M_off(1) M_off(end)], [10^-3 10^-3], 'color', 'k', 'LineStyle','--')
 xlabel('Number of measurements (M)')
 ylabel('Average normalized error')
+xlim([0 M_on(end-1)])
 title('Estimation of N_s')
 legend('Regular', 'With snake pattern','Target error (0.001)')
 grid on
