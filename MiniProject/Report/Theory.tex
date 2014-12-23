@@ -99,11 +99,12 @@
 				\end{bmatrix}
 				\label{eq:dataMap}
 			\end{equation}
-			%
+			
 			$\mathbf{U}(n)$ is an $I \times J$ dense matrix, with entries that vary slowly in space.
 			Because of the slow spatial variation of the data, the corresponding Fourier coefficients, $\mathbf{V}(n)$, are presumed sparse.
 			Further, \cite{Fazel2011} states that $\mathbf{v}(n) = \Psi_{DFT}\ \mathbf{u}(n)$, where $\mathbf{v}(n) = \text{vec}(\mathbf{V}(n))$ is the $N \times 1$ vector gathered by stacking the columns of $\mathbf{V}(n)$.
 
+			\newpage
 			Data from $M$ sensors is then randomly selected for use in reconstruction.
 			The selected data $y(n)$ is represented as
 			%
@@ -172,20 +173,23 @@
 			%
 			where $T$ is the frame length and $T_p$ is the transmission time for one packet.
 
+			\newpage
 			The number of collision-free packets received in a frame, $K$ i a random variable with a binomial distribution:
+
 			\begin{equation}
 				P_K(k) = \text{Prob}\{K=k\} = B(N,q) =
 					\binom{N}{k} q^k(1-q)^{N-k}
 					\label{eq:BinomialModel}
 			\end{equation}
-			%
+			
 			In order to guarantee with a \emph{probability of sufficient sensing} of $P_s$ that $K >= N_s$ one needs to look at the complementary cumulative distribution function of $K$, $Q_K(N_S)$.
 			The condition can be expressed as:
+
 			\begin{equation}
 				\text{Prob}\{K \geq N_s\} = Q_K(N_S) = (1-P_K(N_s)) \geq P_s
 				\label{eq:CCDF} 
 			\end{equation}
-			%
+			
 			Using (\ref{eq:CCDF}), a sufficient probability of a packet arriving without collision, $q_s$ can be found numerically.
 			With $q_s$ one can then solve (\ref{eq:q_of_p}) for $p_s$.
 			\footnote{See Section \ref{sub:estimaton_of_q_s_and_p_s} for a description of how this is done in this project and some examples.}
@@ -193,7 +197,6 @@
 			This is because constraints on bandwidth, described by $T$ and $T_p$, may prevent enough packets from arriving, even if enough sensors are sending, because of collisions.
 
 			% sub-subsection random_access (end)
-
 		\newpage
 		\subsubsection{Suggestions for Improving the RACS Method} % (fold)
 		\label{sub:suggestions_for_improving_the_racs_method}
@@ -216,6 +219,7 @@
 
 				% paragraph choice_of_basis (end)
 
+			
 			\paragraph{Vectorization of Data Map} % (fold)moe
 			\label{par:vectorization_of_data_map}
 

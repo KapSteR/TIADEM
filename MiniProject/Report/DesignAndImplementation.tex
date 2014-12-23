@@ -185,34 +185,36 @@
 			\label{fig:Mean_error_vs_p}
 		\end{figure}
 	
+		\vspace{-3mm} 
 		In Figure \ref{fig:Mean_error_vs_p} the normalized error is plotted against $p_s$ for the same system parameters as above, averaged over 10 simulation runs.
 		It can be seen that, with the snake pattern enabled, the target error is reached with $p_s \approx 0.3$, consistent with $N_s \approx 1100$ as seen in Figure \ref{fig:Mean_k_vs_p}.
 
 		Further, Figure \ref{fig:Mean_error_vs_p} shows that, with regular RACS, the target error is never reached for any $p_s$.
 		This is also consistent with Figure \ref{fig:Mean_k_vs_p}, as it shows that for no $p_s$ does the average number of received packets reach the required $N_S \approx 3500$, because of too many collisions.
+		% \vspace{-2mm} 
 
 		% subsection simulation_of_random_access_transmission (end)
 
 	\subsection{Data Reconstruction (Sensor Fusion)} % (fold)
 	\label{sub:data_reconstruction}
-
+		\vspace{-3mm} 
 		Reconstructing data from a subset of all the data is a matter of solving the convex optimization problem (\ref{eq:minimizationProblem}) presented in Section \ref{sub:compressive_sensing_in_spatial_domain}.
 		In this project this is done using the the MATLAB function \texttt{SolveBP.m} from the toolbox called Sparelab \cite{SparseLab:Online}.
 		
 		This function takes as input the augmented basis $\Phi'$, which is the selection matrix $R$ multiplied with the selected basis $\Psi$, the received vector $y$ and the total number of sensors $N$.
 		It then uses the \emph{Basis Pursuit} method to solve the problem and returns a reconstructed vector.
 		It is then only a matter of reshaping the vector back into a matrix, and you have the reconstructed data map.
+		% \vspace{-2mm} 
 
 	
 		% subsection data_reconstruction (end)
 
 	\subsection{Full Simulation} % (fold)
 		\label{sub:full_simulation}
-
+		\vspace{-3mm} 
 		The MATALB script \texttt{RACS\_Simulation.m} simulates a full RACS frame.
 		It takes the network specifications (Probability of sufficient sensing $P_s$, Frame time $T$ and Packet transmission time $T_p$) and the data as input.
 		Then it goes trough the entire process of estimating sparsity, determining probability of sensing $p_s$, simulating transmission, reconstructing the data map and calculating the normalized error.
-
 		Finally the results are plotted for visualization and verification.
 		
 		% subsection full_simulation (end)
