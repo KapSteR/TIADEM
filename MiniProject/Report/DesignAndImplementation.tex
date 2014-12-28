@@ -9,8 +9,8 @@
 	\subsection{Data Input} % (fold)
 	\label{sub:data_input}
 
-		The MATLAB script \texttt{InputData.m} uses build in functions to extract data from the downloaded G1SST database.
-		It takes as input an upper and lower bound and an eastern and western bound in between which it is supposed to a square set of data.
+		The MATLAB script \texttt{InputData.m} uses build-in functions to extract data from the downloaded G1SST database.
+		It takes as input an upper and lower bound and an eastern and western bound in between which it is supposed to extract a rectangular set of data.
 
 		The data is converted from Kelvin to Celsius, to make it more semantically understandable.
 		The data is then saved to a \texttt{.mat}-file for use in other scripts.
@@ -26,7 +26,7 @@
 		The MATLAB script \texttt{EvalSparsity.m} takes as input to \emph{.mat}-file described in Section \ref{sub:data_input}.
 
 		It vectorizes the data map by stacking either the rows or the columns.
-		The snake pattern, described in Section \ref{par:vectorization_of_data_map} is also implemented, and is enabled by a boolean \texttt{snake}.
+		The snake pattern, described in Section \ref{par:vectorization_of_data_map} is also implemented, and is enabled by a boolean, \texttt{snake}.
 
 		Then it evaluates the sparsity by taking either the DFT or the DCT of the signal.
 		The sparsity is the number, $k$, of coefficients greater than 10 or 0.1, respectively.
@@ -38,7 +38,7 @@
 				{\|\mathbf{u}(n)\|_{l2}}
 		\end{equation}
 
-		In Figure \ref{fig:ExEvalSparseSnakeOff} below the result of running the script on data from a patch of the North Sea.
+		In Figure \ref{fig:ExEvalSparseSnakeOff} below the result of running the script on data from a patch of the North Sea is shown.
 		The data is visibly sparse, in the sense that most of the energy in the DCT is confined to at small number of coefficients.
 		The power does however not taper off as rapidly as one would like.
 		Especially, there are some powerful harmonics present.
@@ -46,12 +46,12 @@
 		When \texttt{snake} is set to \texttt{true}, enabling the use of the snake pattern, the amount of harmonic overtones present is greatly reduced, as seen in Figure \ref{fig:ExEvalSparseSnakeOn}.
 		This results in much greater performance, as the level of error is maintained while the number of samples used is \emph{reduced to one third}. 
 
-		Another way of determining the sufficient number of samples, $N_S$ required for reconstruction is by doing is experimentally.
+		Another way of determining the sufficient number of samples, $N_s$ required for reconstruction is by doing is experimentally.
 		This process entails attempting reconstruction with an increasing number of samples available, and seeing when the error has decreased enough.
 
 		The MATLAB script \texttt{FindOptimumNs.m} does this.
 		It goes trough the process of reconstructing the data from randomly selected data points, for a series of logarithmically spaced values of $M$, doing it 10 times for each value and averaging the result.
-		This produces a plot like the on shown in \ref{fig:Estimation_Ns}.
+		This produces a plot like the one shown in Figure \ref{fig:Estimation_Ns}.
 		This figure can then be used to give a good estimate of $N_s$.
 
 		\begin{figure}[H]
@@ -199,9 +199,9 @@
 	\label{sub:data_reconstruction}
 		\vspace{-3mm} 
 		Reconstructing data from a subset of all the data is a matter of solving the convex optimization problem (\ref{eq:minimizationProblem}) presented in Section \ref{sub:compressive_sensing_in_spatial_domain}.
-		In this project this is done using the the MATLAB function \texttt{SolveBP.m} from the toolbox called Sparelab \cite{SparseLab:Online}.
+		In this project this is done using the the MATLAB function \texttt{SolveBP.m} from the toolbox called Sparselab \cite{SparseLab:Online}.
 		
-		This function takes as input the augmented basis $\Phi'$, which is the selection matrix $R$ multiplied with the selected basis $\Psi$, the received vector $y$ and the total number of sensors $N$.
+		This function takes as input the augmented basis $\Phi'$, which is the selection matrix $\mathbf{R}$ multiplied with the selected basis $\Psi$, the received vector $\mathbf{y}$ and the total number of sensors $N$.
 		It then uses the \emph{Basis Pursuit} method to solve the problem and returns a reconstructed vector.
 		It is then only a matter of reshaping the vector back into a matrix, and you have the reconstructed data map.
 		% \vspace{-2mm} 

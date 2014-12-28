@@ -7,13 +7,13 @@
 \label{sec:theory}
 
 	In this section a brief overview of the theory of compressive sensing and RACS is given, to provide a basic understanding of the subject and to remove ambiguities in terminology and notation.
-	For a thorough review of CS theory the read is referred to other literature \cite{Fazel2011,Candes2008}.
+	For a thorough review of CS theory the reader is referred to other literature e.g. \cite{Fazel2011,Candes2008}.
 
 	\subsection{Sparsity and Basis} % (fold)
 	\label{sub:sparsity_and_basis}
 
 		It is well known that natural signals are often sparse in some domain (time, frequency etc.)\cite{Candes2008}.
-		They are however often sampled at a high resolution in that, or indeed another, domain, to accurately present information in the denser parts of the signal.
+		They are however often sampled at a high resolution in that, or indeed another, domain, to accurately represent the information in the denser parts of the signal.
 		For this reason, lots of data with little to no extra information is being collected and maybe also transmitted, causing an overhead at the expense of for example the lifetime of a Wireless Sensor Network (WSN).
 
 		The theory of CS states that it is possible to do a sparse sampling of a dense signal, sparse in a different domain, and, with high accuracy, reconstruct the sparse representation, and hence the original signal.
@@ -30,7 +30,7 @@
 			%
 			In (\ref{eq:dimReduc}) $\mathbf{x}$ is an $N$-dimensional $K$-sparse vector of the original signal, $\Phi$ is an $ M \times N $ dimensionality reduction matrix and $\mathbf{y}$ is an $M$-dimensional dense vector containing a condensed representation of $\mathbf{x} $, where:
 			\begin{equation}
-				K < M << N 	
+				K \leq M << N 	
 			\end{equation}
 
 			It can then be proven that using \emph{random projection} i.e. using a random dimensionality reduction matrix $\Phi$, will allow for recovery of $\mathbf{x}$ with little to no information loss, with overwhelming probability.
@@ -47,8 +47,8 @@
 				\label{eq:transMat}	
 			\end{equation}
 			%
-			In (\ref{eq:transMat})) $\Psi$ is an $N \times N$ transformation matrix e.g. the Discrete Fourier Transform (DFT) or Discrete cosine Transform (DCT).
-			The dimensionality reduction matrix and the transformation matrix can be combined to an augmented dimensionality matrix.
+			In (\ref{eq:transMat}) $\Psi$ is an $N \times N$ transformation matrix e.g. the Discrete Fourier Transform (DFT) or Discrete Cosine Transform (DCT).
+			The dimensionality reduction matrix and the transformation matrix can be combined to an augmented dimensionality reduction matrix.
 			%
 			\begin{equation}
 				\mathbf{y} = \Phi \Psi \mathbf{x} = \Phi' \mathbf{x}
@@ -58,7 +58,7 @@
 			This, combined with the fact that random projection is an option negates the need for a transformation matrix, as a random projection of any matrix is just another random matrix.
 			It is then only necessary to be aware of the domain in which the signal is sparse when one is reconstructing the signal, not when sampling or transmitting.
 			One needs only to be able to know or construct the random projection matrix used to compress the signal.
-			This can be done by using pseudo-random generator with a know or predictable seed.
+			This can be done by using pseudo-random generator with a known or predictable seed.
 
 			% sub-subsection basis (end)
 
@@ -66,8 +66,8 @@
 	\label{sub:random_access_compressive_sensing}
 
 		In this section a brief introduction to the ideas behind RACS.
-		\footnote{For more information see the original article \cite{Fazel2011}}.
-		This will be done in two parts, one about the random access transmission protocol and one about the proposed method of CS ind the spatial domain.
+		\footnote{For more information see the original article \cite{Fazel2011}}
+		This will be done in two parts, one about the random access transmission protocol and one about the proposed method of CS in the spatial domain.
 
 		Lastly some methods for enhancing the performance of the CS method are proposed.
 		
@@ -80,7 +80,7 @@
 
 			The data at a certain sensor within time frame $n$ is represented as
 			\begin{equation}
-				u_ij(n) = u(x_i, y_j, n)
+				u_{ij}(n) = u(x_i, y_j, n)
 			\end{equation}
 			%
 			where $(x_i, y_j)$ is the sensors location in the grid.
@@ -106,7 +106,7 @@
 
 			\newpage
 			Data from $M$ sensors is then randomly selected for use in reconstruction.
-			The selected data $y(n)$ is represented as
+			The selected data $\mathbf{y}(n)$ is represented as
 			%
 			\begin{equation}
 				\mathbf{y}(n) = 
@@ -115,6 +115,7 @@
 			\end{equation}
 			%
 			where $\mathbf{R}(n)$ is an $M \times N$ random binary selection matrix consisting of $M$ rows of $I^N$ selected uniformly at random.
+			$\mathbf{z}(n)$ is noise, and is neglected from here on.
 
 			The reconstruction problem is then:
 			%
@@ -126,7 +127,7 @@
 					\label{eq:minimizationProblem}
 			\end{equation}
 			%
-			This can be solved as a convex optimization problem, and a number of MATLAB tools are available to do so e.g. Sparselab \cite{SparseLab:Online} and CVX \cite{CVX:Online}
+			This can be solved as a convex optimization problem, and a number of MATLAB toolsboxes are available to do so e.g. Sparselab \cite{SparseLab:Online} and CVX \cite{CVX:Online}
 
 			The minimum number of samples needed for sufficient sensing $N_s$ is stated in theory to be
 			%
@@ -138,7 +139,7 @@
 			where $S$ is the sparsity of the signal and $C$ is a constant, independent of $N$ and $S$.
 			The authors of RACS refer to \cite{Candes2006} for a upper bound on C.
 			Another method is to determine $N_s$ empirically.
-			This method can often produce even lower numbers for $N_s$ than (\ref{eq:NsTheory})).
+			This method can often produce even lower numbers for $N_s$ than (\ref{eq:NsTheory}).
 			For an example, see Section \ref{sub:sparsity_estimation}.
 		
 			% sub-subsection compressive_sensing_in_spatial_domain (end)
@@ -151,13 +152,13 @@
 
 			\begin{enumerate}[label=\bfseries \arabic*:]
 				\item 
-					At the beginning of each frame a sensor node $i$ randomly chooses to participate in sensing with probability $p$, or stay inactive.
+					At the beginning of each frame a sensor node $i$ randomly chooses to participate in sensing with probability $p$, or stays inactive.
 				\item 
 					If node $i$ is selected for sensing, it samples the quantity of interest and transmits it along with its location.
 				\item
 					Node $i$ selects a transmission-delay $\theta_{i}$ before attempting to send its packet.
 				\item
-					The FC collects singleton packets, and discards any colliding packets.
+					The FC collects all singleton packets, and discards any colliding packets.
 				\item
 					At the end of the frame the FC reconstructs  the data from the received measurements.
 
@@ -174,7 +175,7 @@
 			where $T$ is the frame length and $T_p$ is the transmission time for one packet.
 
 			\newpage
-			The number of collision-free packets received in a frame, $K$ i a random variable with a binomial distribution:
+			The number of collision-free packets received in a frame $K$, is a random variable with a binomial distribution:
 
 			\begin{equation}
 				P_K(k) = \text{Prob}\{K=k\} = B(N,q) =
@@ -182,7 +183,7 @@
 					\label{eq:BinomialModel}
 			\end{equation}
 			
-			In order to guarantee with a \emph{probability of sufficient sensing} of $P_s$ that $K >= N_s$ one needs to look at the complementary cumulative distribution function of $K$, $Q_K(N_S)$.
+			In order to guarantee with a \emph{probability of sufficient sensing} $P_s$ that $K \geq N_s$ one needs to look at the complementary cumulative distribution function of $K$, $Q_K(N_S)$.
 			The condition can be expressed as:
 
 			\begin{equation}
@@ -193,7 +194,7 @@
 			Using (\ref{eq:CCDF}), a sufficient probability of a packet arriving without collision, $q_s$ can be found numerically.
 			With $q_s$ one can then solve (\ref{eq:q_of_p}) for $p_s$.
 			\footnote{See Section \ref{sub:estimaton_of_q_s_and_p_s} for a description of how this is done in this project and some examples.}
-			It is important to note here, that a solution of $p_s$ for a given $q_s, N, T$ and $T_p$ does not necessarily exit.
+			It is important to note here, that a solution of $p_s$ for a given $q_s, N, T$ and $T_p$ does not necessarily exist.
 			This is because constraints on bandwidth, described by $T$ and $T_p$, may prevent enough packets from arriving, even if enough sensors are sending, because of collisions.
 
 			% sub-subsection random_access (end)
@@ -201,7 +202,7 @@
 		\subsubsection{Suggestions for Improving the RACS Method} % (fold)
 		\label{sub:suggestions_for_improving_the_racs_method}
 
-			Two suggestions for improving RACS as proposed by \cite{Fazel2011} are presented below.
+			Two suggestions for improving RACS are presented below.
 			One is on the choice of basis, the other on the way spatial data is aggregated into a vector for use with CS.
 
 			\paragraph{Choice of Basis} % (fold)
@@ -212,9 +213,9 @@
 
 				DCT has many benefits that has furthered its use in other compression schemes; \emph{JPEG} and \emph{mp3} both employ DCTs for example.
 
-				Firstly, DCTs work only with real numbers and cosines, where DFT uses sine and cosines in a complex representation. This could be an advantage on some platforms, but is not the most important factor in this use case.
+				Firstly, DCTs work only with real numbers and cosines, where DFT uses sines and cosines in a complex representation. This could be an advantage on some platforms, but is not the most important factor in this use case.
 
-				Secondly, DCTs often converge in few coefficients that DFT, advantageous for sparsity applications.
+				Secondly, DCTs often converge in fewer coefficients than DFT, advantageous for sparsity applications.
 				This is in part due to the nature of the DCT, that handles discontinuities at the boundaries better.
 
 				% paragraph choice_of_basis (end)
@@ -223,14 +224,14 @@
 			\paragraph{Vectorization of Data Map} % (fold)moe
 			\label{par:vectorization_of_data_map}
 
-				As described in Section \ref{sub:compressive_sensing_in_spatial_domain} the data map (\ref{eq:dataMap})) is vectorized by `simply' stacking the columns.
+				As described in Section \ref{sub:compressive_sensing_in_spatial_domain} the data map (\ref{eq:dataMap}) is vectorized by `simply' stacking the columns.
 
 				I suspect that on top of the unavoidable periodicity that the vectorization imparts, a large amount of discontinuities are likely to occur.
 				This is because the data is very unlikely to be similar at different boundaries.
 				These discontinuities cause strong harmonic overtones and reduces the rate of convergence and therefore the sparsity of the signal.
 				This reduces the efficiency of CS.
 
-				My suggestion is to vectorize the matrix by scanning it in a snake pattern, going from top left, moving left to right till the end of the row, moving one row down, going right to left till the end of the row, moving one row down etc.
+				My suggestion is to vectorize the matrix by scanning it in a snake pattern, going from top left, moving left-to-right until the end of the row, moving one row down, going right-to-left until the end of the row, moving one row down etc.
 
 				This method is inspired by the fact that the signal is assumed slowly varying in space.
 				This fact means that, moving in the described snake pattern, it is unlikely to have large discontinuities, unless they are actually present in the original data.
